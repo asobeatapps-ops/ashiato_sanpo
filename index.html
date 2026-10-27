@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#f8f7f2">
-<meta name="description" content="お気に入りの写真に、かわいい動物の足跡を残して遊ぼう。6種類の3D動物でおさんぽ＆PNG保存。">
+<meta name="description" content="お気に入りの写真に、かわいい動物の足跡を残して遊ぼう。5種類の3D動物で、描いたコースをGOでおさんぽ＆PNG保存。">
 <title>あしあとさんぽ。｜写真の上を、ちいさな冒険</title>
 <style>
 :root{--ink:#25342e;--muted:#728077;--cream:#f8f7f2;--soft:#f0f0e9;--line:#e8e9e1;--green:#376b53;--green2:#e9f4ec;--pink:#fd8176;--shadow:0 14px 50px rgba(40,52,46,.08)}
@@ -19,7 +19,7 @@ body::before{content:"";position:fixed;inset:0;pointer-events:none;background:ra
 .header-right{display:flex;gap:9px;align-items:center}.privacy{display:flex;align-items:center;gap:7px;border:1px solid #dce9da;border-radius:30px;padding:9px 13px;background:#f4faf2;color:#538164;font-size:11px;font-weight:800;white-space:nowrap}.privacy::before{content:"";width:7px;height:7px;border-radius:50%;background:#76b488;box-shadow:0 0 0 3px #76b48822}
 .btn{display:inline-flex;align-items:center;justify-content:center;gap:7px;border:0;border-radius:13px;padding:11px 16px;font-size:12px;font-weight:900;transition:transform .15s,background .15s,box-shadow .15s;white-space:nowrap}.btn:active{transform:translateY(2px) scale(.98)}.btn-light{background:#fff;color:var(--ink);border:1px solid #e3e8e0}.btn-light:hover{background:#f4f7f2}.btn-green{background:var(--green);color:white;box-shadow:0 8px 16px #376b5333}.btn-green:hover{background:#2b5c46}.btn-rose{background:#fc8779;color:#fff;box-shadow:0 7px 14px #fd81764d}.btn-subtle{background:#f4f5f0;color:#5b6961}.btn svg{width:17px;height:17px}
 .app-main{display:grid;grid-template-columns:minmax(0,1fr) 295px;gap:18px;align-items:start}.work-area{min-width:0}.animal-panel{padding:15px 15px 12px;background:#fff;border:1px solid #ebeee7;border-radius:20px;margin-bottom:14px;box-shadow:0 5px 25px #202e2110}
-.panel-title{display:flex;align-items:center;justify-content:space-between;gap:9px;margin-bottom:11px}.panel-title strong{font-size:13px;letter-spacing:-.02em}.panel-title small{font-size:10px;color:var(--muted);font-weight:700}.animal-options{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:8px}
+.panel-title{display:flex;align-items:center;justify-content:space-between;gap:9px;margin-bottom:11px}.panel-title strong{font-size:13px;letter-spacing:-.02em}.panel-title small{font-size:10px;color:var(--muted);font-weight:700}.animal-options{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:8px}
 .animal-btn{background:#f9faf7;border:2px solid transparent;border-radius:14px;padding:7px 4px 8px;color:#536158;display:flex;align-items:center;justify-content:center;gap:4px;flex-direction:column;font-size:11px;font-weight:900;min-width:0;transition:all .18s}.animal-btn:hover{transform:translateY(-2px);background:#f4f8f3}.animal-btn[aria-pressed="true"]{background:var(--green2);border-color:#79b78f;color:#305841;box-shadow:0 3px 10px #58896817}.animal-icon{display:grid;place-items:center;width:45px;height:40px;border-radius:12px;font-size:29px;line-height:1}.animal-btn[aria-pressed="true"] .animal-icon{background:#fff8}
 .stage{position:relative;overflow:hidden;width:100%;height:clamp(370px,65vh,750px);background:radial-gradient(ellipse at 50% 44%,#f3f1e9,#ebece6 70%,#e5e8df);border:1px solid #e3e6db;border-radius:22px;box-shadow:var(--shadow);touch-action:none;user-select:none;cursor:crosshair;isolation:isolate}
 .stage::before{content:"";position:absolute;inset:0;background-image:radial-gradient(#aab9ad66 0.65px,transparent .65px);background-size:21px 21px;opacity:.34;pointer-events:none}
@@ -44,6 +44,24 @@ dialog{border:0;border-radius:22px;padding:0;max-width:min(94vw,470px);box-shado
 @media(max-width:540px){.controls{display:flex;flex-direction:column;gap:0;padding:16px}.ctrl-section,.ctrl-section:first-child,.ctrl-section:nth-child(2),.ctrl-section:nth-child(3),.ctrl-section:nth-child(4){width:100%;display:block;grid-column:auto;grid-row:auto;padding:0 0 17px;margin:0 0 17px;border:0;border-bottom:1px dashed #e5e9e3}.ctrl-section:nth-child(4){border-top:0;padding-top:0}.palette{justify-content:flex-start;gap:clamp(9px,3vw,17px)}.swatch,.color-input-wrap{width:30px;height:30px}.ctrl-header strong{font-size:14px}.quick-save{display:block}}
 @media(max-width:410px){.app-title{font-size:20px}.header-right>.btn{padding:10px;font-size:11px}.animal-panel .panel-title small{font-size:9px}.stage{height:clamp(318px,48dvh,430px)}.controls{column-gap:12px;padding:11px}.ctrl-section:first-child{padding-right:10px}.palette{gap:8px}.swatch,.color-input-wrap{width:27px;height:27px}.form-label{font-size:10px}.stage-top .stage-label{max-width:58%;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}}
 @media(prefers-reduced-motion:reduce){*,*::before,*::after{transition:none!important;animation:none!important}}
+
+/* V2: drawing a route first and walking it by pressing GO. */
+.stage-top{justify-content:flex-start}
+.walk-toolbar{display:flex;align-items:center;justify-content:space-between;gap:14px;margin-top:11px;padding:12px 13px 12px 16px;background:#fff;border:1px solid #e5e9df;border-radius:16px;box-shadow:0 6px 20px #2442320b}
+.walk-toolbar-info{display:flex;flex-direction:column;gap:4px;min-width:0}
+.walk-toolbar-info b{font-size:12px;font-weight:900;color:#32694d}
+.walk-toolbar-info small{font-size:10px;font-weight:700;color:#7c897e;line-height:1.5}
+.walk-toolbar-buttons{display:flex;align-items:center;gap:7px;flex-shrink:0}
+.walk-toolbar-buttons .btn{font-size:11px;padding:12px 10px;min-height:43px}
+.walk-toolbar-buttons .go-btn{background:#376b53;color:white;min-width:90px;border-radius:12px;box-shadow:0 6px 17px #376b532d;font-size:16px;letter-spacing:.04em;font-weight:900}
+.walk-toolbar-buttons .go-btn:not(:disabled):hover{background:#2b5c46}
+.walk-toolbar-buttons .go-btn[data-running="true"]{background:#da786b;box-shadow:0 6px 17px #d8776b2d;font-size:13px}
+.walk-toolbar-buttons button:disabled{cursor:not-allowed;opacity:.44;box-shadow:none}
+.animal-btn:disabled,.swatch:disabled,.speed-btn:disabled,#stampsToggle:disabled{cursor:not-allowed;opacity:.72}
+#stage{cursor:crosshair}
+@media(max-width:1140px){.walk-toolbar{flex-direction:column;align-items:stretch;gap:9px}.walk-toolbar-buttons{display:grid;grid-template-columns:1fr 1fr 1.05fr;width:100%}.walk-toolbar-buttons .btn{min-width:0;padding:11px 5px}}
+@media(max-width:740px){.walk-toolbar{margin-top:8px;padding:10px 11px;border-radius:14px}.walk-toolbar-info b{font-size:12px}.walk-toolbar-buttons .go-btn{min-width:0}.stage-guide{max-width:calc(100% - 20px);white-space:normal;text-align:center;line-height:1.3}}
+@media(max-width:410px){.walk-toolbar-buttons .btn{font-size:10px}.walk-toolbar-buttons .go-btn{font-size:15px}}
 </style>
 </head>
 <body>
@@ -60,17 +78,24 @@ dialog{border:0;border-radius:22px;padding:0;max-width:min(94vw,470px);box-shado
     <button class="animal-btn" data-animal="cat" aria-pressed="false" type="button"><span class="animal-icon">🐱</span>ねこ</button>
     <button class="animal-btn" data-animal="bird" aria-pressed="false" type="button"><span class="animal-icon">🐦</span>とり</button>
     <button class="animal-btn" data-animal="bear" aria-pressed="false" type="button"><span class="animal-icon">🐻</span>くま</button>
-    <button class="animal-btn" data-animal="frog" aria-pressed="false" type="button"><span class="animal-icon">🐸</span>かえる</button>
     <button class="animal-btn" data-animal="horse" aria-pressed="false" type="button"><span class="animal-icon">🐴</span>うま</button>
    </div>
   </div>
   <div class="stage" id="stage" aria-label="写真の上をなぞって動物を歩かせる領域">
    <canvas id="glCanvas" aria-hidden="true"></canvas><canvas id="guideCanvas" aria-hidden="true"></canvas>
-   <div class="stage-top"><span class="stage-label" id="photoLabel">🌿 サンプルの原っぱ</span><span class="stage-chip"><i></i><span id="markCounter">あしあと 0 こ</span></span></div>
-   <button id="quickSaveBtn" class="quick-save" type="button">↓ PNGを保存</button><div class="stage-guide"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round"><path d="M8 14a2 2 0 1 1-4 0 2 2 0 0 1 4 0ZM13 7a2 2 0 1 1-4 0 2 2 0 0 1 4 0ZM20 9a2 2 0 1 1-4 0 2 2 0 0 1 4 0Z"/><path d="M8 19c2-3 4-5 7-5 2 0 4 1 4 4"/></svg><span id="hintText">写真をなぞると、どうぶつがおさんぽ♪</span></div>
-   <div class="welcome" id="welcome"><div class="welcome-card"><div class="welcome-animals">🐶 🐱 🐸</div><h2>写真の上で、<br><span>あしあとさんぽ。</span></h2><p>お気に入りの写真が、どうぶつたちの遊び場に。<br>とことこ歩いて、世界にひとつの足跡アートを作ろう。</p><button class="btn btn-green" id="pickPhotoWelcome" type="button">🖼️ 写真をえらんで遊ぶ</button><button class="btn btn-light" id="playSample" type="button">🌿 サンプルの原っぱで遊ぶ</button><small>無料・ログイン不要・写真のアップロードなし</small></div></div>
+   <div class="stage-top"><span class="stage-label" id="photoLabel">🌿 サンプルの原っぱ</span></div>
+   <button id="quickSaveBtn" class="quick-save" type="button">↓ PNGを保存</button><div class="stage-guide"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round"><path d="M8 14a2 2 0 1 1-4 0 2 2 0 0 1 4 0ZM13 7a2 2 0 1 1-4 0 2 2 0 0 1 4 0ZM20 9a2 2 0 1 1-4 0 2 2 0 0 1 4 0Z"/><path d="M8 19c2-3 4-5 7-5 2 0 4 1 4 4"/></svg><span id="hintText">線をなぞって、GOでおさんぽ！</span></div>
+   <div class="welcome" id="welcome"><div class="welcome-card"><div class="welcome-animals">🐶 🐱 🐻 🐴</div><h2>写真の上で、<br><span>あしあとさんぽ。</span></h2><p>お気に入りの写真が、どうぶつたちの遊び場に。<br>好きな線を描いてGO！とことこ歩いて足跡アートを作ろう。</p><button class="btn btn-green" id="pickPhotoWelcome" type="button">🖼️ 写真をえらんで遊ぶ</button><button class="btn btn-light" id="playSample" type="button">🌿 サンプルの原っぱで遊ぶ</button><small>無料・ログイン不要・写真のアップロードなし</small></div></div>
   </div>
-  <div class="stage-footnote"><span><span class="indicator"></span>スマホは指で、PCはマウスでなぞってね</span><span><b id="activeAnimalName">🐶 いぬ</b>がおさんぽ中</span></div>
+  <div class="walk-toolbar" aria-label="コースの編集とおさんぽ開始">
+   <div class="walk-toolbar-info"><b id="walkStatus">① 写真の上に線を描こう</b><small id="walkSubstatus">離れた線も何本でもOK！ GOで順番に歩きます</small></div>
+   <div class="walk-toolbar-buttons">
+    <button type="button" class="btn btn-subtle" id="undoBtn">↶ ひとつ戻す</button>
+    <button type="button" class="btn btn-subtle" id="clearBtn">♲ 全部けす</button>
+    <button type="button" class="btn go-btn" id="goBtn" disabled>▶ GO</button>
+   </div>
+  </div>
+  <div class="stage-footnote"><span><span class="indicator"></span>① 線をなぞる → ② GOで歩く（線の間は足跡なし）</span><span>どうぶつ：<b id="activeAnimalName">🐶 いぬ</b></span></div>
  </section>
  <aside class="controls" aria-label="あしあと設定と保存">
   <section class="ctrl-section"><div class="ctrl-header"><div class="ctrl-heading"><span class="roundicon">🎨</span><strong>あしあとカラー</strong></div><span class="mini">好きな色に！</span></div>
@@ -83,19 +108,18 @@ dialog{border:0;border-radius:22px;padding:0;max-width:min(94vw,470px);box-shado
       <button class="swatch" type="button" data-color="#f6c65a" style="--sw:#f6c65a" aria-label="黄色" aria-pressed="false"></button>
       <label class="color-input-wrap" title="自分で色を選ぶ"><input id="customColor" type="color" value="#353a39" aria-label="自由な色を選択"></label>
     </div>
-    <label class="form-label" for="sizeRange">あしあとの大きさ <output id="sizeOut">100%</output></label><input type="range" id="sizeRange" min="50" max="200" value="100" step="5" style="--fill:33.333%">
+    <label class="form-label" for="sizeRange">あしあとの大きさ <output id="sizeOut">80%</output></label><input type="range" id="sizeRange" min="50" max="200" value="80" step="5" style="--fill:20%">
     <label class="form-label" for="opacityRange">あしあとの濃さ <output id="opacityOut">85%</output></label><input type="range" id="opacityRange" min="0" max="100" value="85" step="5" style="--fill:85%">
   </section>
   <section class="ctrl-section"><div class="ctrl-header"><div class="ctrl-heading"><span class="roundicon">🐾</span><strong>あるくスピード</strong></div></div><div class="segment" id="speedSegment"><button type="button" class="speed-btn" data-speed="slow" aria-pressed="false">のんびり</button><button type="button" class="speed-btn" data-speed="normal" aria-pressed="true">ふつう</button><button type="button" class="speed-btn" data-speed="fast" aria-pressed="false">はやい</button></div></section>
-  <section class="ctrl-section"><div class="toggle-line"><div><b>あしあとを残す</b><small>OFFで自由におさんぽ</small></div><button id="stampsToggle" class="switch" type="button" role="switch" aria-label="あしあとを残す" aria-checked="true"></button></div></section>
-  <section class="ctrl-section"><div class="ctrl-header"><div class="ctrl-heading"><span class="roundicon">↶</span><strong>おえかき操作</strong></div></div><div class="action-grid"><button type="button" class="btn btn-subtle" id="undoBtn">↶ ひとつ戻す</button><button type="button" class="btn btn-subtle" id="clearBtn">♲ 全部けす</button></div></section>
+  <section class="ctrl-section"><div class="toggle-line"><div><b>あしあとを残す</b><small>OFFなら足跡を残しません</small></div><button id="stampsToggle" class="switch" type="button" role="switch" aria-label="あしあとを残す" aria-checked="true"></button></div></section>
   <div class="save-panel"><button type="button" id="saveBtn" class="btn btn-green savebtn">✦ あしあと画像を保存</button><button type="button" id="shareBtn" class="btn btn-light sharebtn">↗ 画像を共有する</button><div class="action-caption">元画像のサイズを保ってPNGに保存。<br>動物やボタンは写りません。</div></div>
  </aside>
 </main>
 </div>
 <input type="file" id="photoInput" accept="image/png,image/jpeg,image/webp" hidden>
 <div class="toast" id="toast" role="status" aria-live="polite"></div>
-<dialog id="confirmDialog"><div class="dialog-inner"><h3>あしあとを全部けしますか？</h3><p>これまでの足跡がすべて消えます。この操作は元に戻せません。</p><div class="dialog-actions"><button id="cancelClear" class="btn btn-light">キャンセル</button><button id="confirmClear" class="btn btn-rose">全部けす</button></div></div></dialog>
+<dialog id="confirmDialog"><div class="dialog-inner"><h3>線とあしあとを全部けしますか？</h3><p>描いた線と、これまでの足跡がすべて消えます。この操作は元に戻せません。</p><div class="dialog-actions"><button id="cancelClear" class="btn btn-light">キャンセル</button><button id="confirmClear" class="btn btn-rose">全部けす</button></div></div></dialog>
 <dialog id="previewDialog"><div class="dialog-inner"><h3>🐾 あしあとアートの完成！</h3><p id="previewMessage">画像を長押しすると写真に保存できます。</p><img id="previewImage" class="preview-img" alt="保存用の完成したあしあと画像"><div class="preview-actions"><button id="downloadFromPreview" class="btn btn-green">↓ PNGを保存</button><button id="closePreview" class="btn btn-light">とじる</button></div></div></dialog>
 <script>
 'use strict';
@@ -108,14 +132,18 @@ dialog{border:0;border-radius:22px;padding:0;max-width:min(94vw,470px);box-shado
   function clamp(v,a,b){return Math.max(a,Math.min(b,v))}
   function hypot(x,z){return Math.hypot(x,z)}
   const animals={
-    dog:{name:'いぬ',emoji:'🐶',step:.26,spread:.17,print:.39},cat:{name:'ねこ',emoji:'🐱',step:.235,spread:.14,print:.32},
-    bird:{name:'とり',emoji:'🐦',step:.20,spread:.12,print:.36},bear:{name:'くま',emoji:'🐻',step:.28,spread:.19,print:.47},
-    frog:{name:'かえる',emoji:'🐸',step:.37,spread:.19,print:.41},horse:{name:'うま',emoji:'🐴',step:.29,spread:.16,print:.41}
+    dog:{name:'いぬ',emoji:'🐶',step:.26,spread:.17,print:.39,defaultSize:80,strideMultiplier:1},
+    cat:{name:'ねこ',emoji:'🐱',step:.235,spread:.14,print:.32,defaultSize:80,strideMultiplier:1},
+    bird:{name:'とり',emoji:'🐦',step:.20,spread:.12,print:.36,defaultSize:80,strideMultiplier:1},
+    bear:{name:'くま',emoji:'🐻',step:.28,spread:.19,print:.47,defaultSize:75,strideMultiplier:2},
+    horse:{name:'うま',emoji:'🐴',step:.29,spread:.16,print:.41,defaultSize:80,strideMultiplier:2}
   };
-  const state={animal:'dog',color:'#353a39',size:100,opacity:.85,speed:'normal',stampsOn:true,started:false,
-     photo:null,photoName:'サンプルの原っぱ',pw:10,ph:7.5,animalScale:1,x:0,z:0,yaw:0,
-     path:[],pointerId:null,dragging:false,lastTouch:null,groups:[],marks:[],nextGroup:1,activeGroup:0,
-     stampAccum:0,footSide:1,motion:0,traveling:false,viewW:12,viewH:9,visibleAt:0};
+  const state={animal:'dog',color:'#353a39',size:80,opacity:.85,speed:'normal',stampsOn:true,started:false,
+    photo:null,photoName:'サンプルの原っぱ',pw:10,ph:7.5,animalScale:1,x:0,z:0,yaw:0,
+    draftStrokes:[],drawingStroke:null,pointerId:null,lastTouch:null,
+    queue:[],runIndex:0,pointIndex:0,runMode:'',playing:false,groups:[],marks:[],nextGroup:1,activeGroup:0,
+    stampAccum:0,footSide:1,motion:0,traveling:false,viewW:12,viewH:9,
+    sizeByAnimal:Object.fromEntries(Object.entries(animals).map(([k,a])=>[k,a.defaultSize]))};
   // Footprints are kept in photo-local normalized coordinates, independent of screen resolution.
   let previewCanvas=document.createElement('canvas'),previewCtx=previewCanvas.getContext('2d',{alpha:true});
   let gl=null,scene3d=null,photoTexture=null,printsTexture=null,shadowTexture=null,frameId=0,lastFrame=0,lastPhotoURL=null;
@@ -141,10 +169,6 @@ dialog{border:0;border-radius:22px;padding:0;max-width:min(94vw,470px);box-shado
       case 'bear':
         [-.35,-.17,0,.17,.35].forEach((x,i)=>oval(x,-.36+(i%2?-.055:0),.105,.11));
         path(()=>{ctx.moveTo(-.42,.13);ctx.bezierCurveTo(-.48,-.06,-.23,-.16,-.07,-.07);ctx.bezierCurveTo(.09,-.19,.47,-.09,.45,.15);ctx.bezierCurveTo(.43,.39,.25,.43,.02,.39);ctx.bezierCurveTo(-.24,.44,-.44,.34,-.42,.13)});break;
-      case 'frog':
-        ctx.lineWidth=.11;ctx.beginPath();ctx.moveTo(-.16,.30);ctx.lineTo(-.24,-.01);ctx.lineTo(-.43,-.33);ctx.moveTo(-.24,-.01);ctx.lineTo(-.13,-.41);ctx.moveTo(-.24,-.01);ctx.lineTo(.0,-.35);ctx.stroke();
-        [-.43,-.13,0].forEach((x,i)=>oval(x,[-.33,-.41,-.35][i],.075,.075));
-        path(()=>{ctx.moveTo(-.32,.02);ctx.bezierCurveTo(-.44,.1,-.35,.37,-.14,.34);ctx.bezierCurveTo(-.01,.31,.04,.08,-.15,.02);ctx.closePath()});break;
       case 'horse':
         ctx.lineWidth=.17;ctx.beginPath();ctx.moveTo(-.33,-.34);ctx.bezierCurveTo(-.35,.02,-.37,.34,0,.36);ctx.bezierCurveTo(.37,.34,.35,.02,.33,-.34);ctx.stroke();
         ctx.lineWidth=.06;ctx.beginPath();ctx.moveTo(-.31,-.30);ctx.lineTo(-.11,-.30);ctx.moveTo(.31,-.30);ctx.lineTo(.11,-.30);ctx.stroke();break;
@@ -158,19 +182,48 @@ dialog{border:0;border-radius:22px;padding:0;max-width:min(94vw,470px);box-shado
     if(scene3d){if(scene3d.makeTexture){if(printsTexture)gl.deleteTexture(printsTexture);printsTexture=scene3d.makeTexture(previewCanvas)}scene3d.dirty=true}
   }
   function pushMark(x,z,dirx,dirz){if(!state.stampsOn||!state.started||state.opacity<=0)return;
-    const spec=animals[state.animal],separation=spec.spread*state.animalScale;
+    const spec=animals[state.animal],separation=spec.spread*state.animalScale*(state.size/spec.defaultSize);
     const side=state.footSide;state.footSide*=-1;
     const px=clamp(x+(-dirz)*separation*side,-state.pw/2+.05,state.pw/2-.05);
     const pz=clamp(z+dirx*separation*side,-state.ph/2+.05,state.ph/2-.05);
     const m={u:clamp((px/state.pw)+.5,0,1),v:clamp((pz/state.ph)+.5,0,1),rotation:Math.atan2(dirz,dirx)+Math.PI/2,
       size:spec.print*state.animalScale*(state.size/100),color:state.color,opacity:state.opacity,animal:state.animal,boardWidth:state.pw,group:state.activeGroup};
+    if(state.groups[state.groups.length-1]!==state.activeGroup)state.groups.push(state.activeGroup);
     state.marks.push(m);drawPaw(previewCtx,m,previewCanvas.width,previewCanvas.height);if(scene3d)scene3d.dirty=true;
-    updateCounter();
   }
-  function updateCounter(){$out('markCounter',`あしあと ${state.marks.length.toLocaleString('ja-JP')} こ`);$('undoBtn').disabled=state.groups.length===0;$('undoBtn').style.opacity=state.groups.length===0?'.5':'1'}
-  function stopTravel(){state.path=[];state.traveling=false;state.motion=0;state.stampAccum=0;state.activeGroup=0}
-  function clearMarks(){stopTravel();state.marks=[];state.groups=[];state.nextGroup=1;state.footSide=1;previewCtx.clearRect(0,0,previewCanvas.width,previewCanvas.height);if(scene3d)scene3d.dirty=true;updateCounter()}
-  function undo(){if(!state.groups.length){toast('まだ戻せる足跡がありません');return}stopTravel();const g=state.groups.pop();state.marks=state.marks.filter(m=>m.group!==g);paintAllMarks(previewCtx,previewCanvas.width,previewCanvas.height);if(scene3d)scene3d.dirty=true;updateCounter();toast('ひとつ前のおさんぽを戻しました ↶')}
+  // One drawn stroke is one undo unit. Undo pending lines first, then completed footprints.
+  function updateToolbar(){
+    const n=state.draftStrokes.length+(state.drawingStroke?1:0);
+    $('undoBtn').disabled=n===0&&state.groups.length===0;
+    $('clearBtn').disabled=n===0&&state.marks.length===0&&!state.playing;
+    $('goBtn').disabled=!state.playing&&state.draftStrokes.length===0;
+    $('goBtn').textContent=state.playing?'■ 中断':'▶ GO';
+    $('goBtn').dataset.running=String(state.playing);
+    if(state.playing){
+      $('walkStatus').textContent='🐾 おさんぽ中…';
+      $('walkSubstatus').textContent=`${Math.min(state.runIndex+1,state.queue.length)} / ${state.queue.length} 本目 ・ 線と線の間は足跡なし`;
+    }else if(n>0){
+      $('walkStatus').textContent=`✓ ${n}本の線を準備しました`;
+      $('walkSubstatus').textContent='GOで描いた順番に歩きます。離れた線もOK！';
+    }else{
+      $('walkStatus').textContent='① 写真の上に線を描こう';
+      $('walkSubstatus').textContent='離れた線も何本でもOK！ GOで順番に歩きます';
+    }
+  }
+  function lockRouteSettings(locked){
+    document.querySelectorAll('.animal-btn,.swatch,.speed-btn,#customColor,#sizeRange,#opacityRange,#stampsToggle').forEach(el=>el.disabled=locked);
+  }
+  function stopTravel(){state.queue=[];state.runIndex=0;state.pointIndex=0;state.runMode='';state.playing=false;state.traveling=false;state.motion=0;state.stampAccum=0;state.activeGroup=0;lockRouteSettings(false);updateToolbar()}
+  function clearMarks(){stopTravel();state.draftStrokes=[];state.drawingStroke=null;state.pointerId=null;state.lastTouch=null;
+    state.marks=[];state.groups=[];state.nextGroup=1;state.footSide=1;
+    previewCtx.clearRect(0,0,previewCanvas.width,previewCanvas.height);if(scene3d)scene3d.dirty=true;updateToolbar()}
+  function undo(){if(state.playing)stopTravel();if(state.draftStrokes.length){state.draftStrokes.pop();updateToolbar();toast('最後に描いた線を取り消しました ↶');return}
+    if(state.drawingStroke){state.drawingStroke=null;state.pointerId=null;updateToolbar();return}
+    if(!state.groups.length){toast('戻せる線や足跡がありません');return}
+    const g=state.groups.pop();state.marks=state.marks.filter(m=>m.group!==g);
+    paintAllMarks(previewCtx,previewCanvas.width,previewCanvas.height);if(scene3d)scene3d.dirty=true;
+    updateToolbar();toast('ひとつ前の線の足跡を戻しました ↶');
+  }
   const imageElement=new Image();
   function generateSample(){const c=document.createElement('canvas');c.width=1400;c.height=1050;const ctx=c.getContext('2d');const w=c.width,h=c.height;
     const grd=ctx.createLinearGradient(0,0,w,h);grd.addColorStop(0,'#eff2d4');grd.addColorStop(1,'#cde4b7');ctx.fillStyle=grd;ctx.fillRect(0,0,w,h);
@@ -194,7 +247,7 @@ dialog{border:0;border-radius:22px;padding:0;max-width:min(94vw,470px);box-shado
     state.x=0;state.z=0;state.yaw=0;clearMarks();state.started=true;
     $('welcome').hidden=true;$('photoLabel').textContent=`${isSample?'🌿':'🖼️'} ${name.length>29?name.slice(0,27)+'…':name}`;
     setupPreview();if(scene3d){scene3d.setPhoto(img);scene3d.resize()}
-    $('hintText').textContent='写真をなぞると、どうぶつがおさんぽ♪';toast('準備OK！写真の上をなぞってみよう 🐾');
+    $('hintText').textContent='線をなぞって、GOを押してね！';toast('準備OK！コースをなぞってからGOを押そう 🐾');
   }
   function openPicker(){$('photoInput').click()}
   $('photoInput').addEventListener('change',async e=>{
@@ -209,52 +262,106 @@ dialog{border:0;border-radius:22px;padding:0;max-width:min(94vw,470px);box-shado
   $('pickPhotoWelcome').addEventListener('click',openPicker);$('playSample').addEventListener('click',()=>usePhoto(generateSample(),'サンプルの原っぱ',true));
   $('changeImageTop').addEventListener('click',openPicker);
   document.querySelectorAll('.animal-btn').forEach(btn=>btn.addEventListener('click',()=>{
-    state.animal=btn.dataset.animal;stopTravel();document.querySelectorAll('.animal-btn').forEach(el=>el.setAttribute('aria-pressed',String(el===btn)));
-    $out('activeAnimalName',`${animals[state.animal].emoji} ${animals[state.animal].name}`);toast(`${animals[state.animal].emoji} ${animals[state.animal].name}にチェンジ！`);
+    if(state.playing){toast('おさんぽが終わってから動物を変えてね');return}
+    state.animal=btn.dataset.animal;
+    document.querySelectorAll('.animal-btn').forEach(el=>el.setAttribute('aria-pressed',String(el===btn)));
+    $('sizeRange').value=String(state.sizeByAnimal[state.animal]);setSlider($('sizeRange'),$('sizeOut'));
+    $out('activeAnimalName',`${animals[state.animal].emoji} ${animals[state.animal].name}`);
+    toast(`${animals[state.animal].emoji} ${animals[state.animal].name}にチェンジ！ あしあと ${state.size}%`);
   }));
   document.querySelectorAll('.swatch').forEach(btn=>btn.addEventListener('click',()=>setColor(btn.dataset.color)));
   function setColor(color){state.color=color;$('customColor').value=color;document.querySelectorAll('.swatch').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.color.toLowerCase()===color.toLowerCase())))}
   $('customColor').addEventListener('input',e=>setColor(e.target.value));
-  function setSlider(input,output){let v=Number(input.value);state[input.id==='sizeRange'?'size':'opacity']=input.id==='sizeRange'?v:v/100;output.textContent=`${v}%`;input.style.setProperty('--fill',`${(v-Number(input.min))/(Number(input.max)-Number(input.min))*100}%`)}
+  function setSlider(input,output){let v=Number(input.value);state[input.id==='sizeRange'?'size':'opacity']=input.id==='sizeRange'?v:v/100;if(input.id==='sizeRange')state.sizeByAnimal[state.animal]=v;output.textContent=`${v}%`;input.style.setProperty('--fill',`${(v-Number(input.min))/(Number(input.max)-Number(input.min))*100}%`)}
   ['sizeRange','opacityRange'].forEach(id=>{$(id).addEventListener('input',()=>setSlider($(id),$(id==='sizeRange'?'sizeOut':'opacityOut')));setSlider($(id),$(id==='sizeRange'?'sizeOut':'opacityOut'))});
   document.querySelectorAll('.speed-btn').forEach(btn=>btn.addEventListener('click',()=>{state.speed=btn.dataset.speed;document.querySelectorAll('.speed-btn').forEach(b=>b.setAttribute('aria-pressed',String(b===btn)))}));
   $('stampsToggle').addEventListener('click',()=>{state.stampsOn=!state.stampsOn;$('stampsToggle').setAttribute('aria-checked',String(state.stampsOn));toast(state.stampsOn?'あしあとを残します 🐾':'あしあとを残さず歩きます')});
-  $('undoBtn').addEventListener('click',undo);$('clearBtn').addEventListener('click',()=>{if(!state.marks.length){toast('まだ足跡はありません');return}$('confirmDialog').showModal()});
-  $('cancelClear').addEventListener('click',()=>$('confirmDialog').close());$('confirmClear').addEventListener('click',()=>{clearMarks();$('confirmDialog').close();toast('あしあとをすべて消しました')});
+  $('undoBtn').addEventListener('click',undo);$('clearBtn').addEventListener('click',()=>{if(!state.marks.length&&!state.draftStrokes.length&&!state.playing){toast('消す線や足跡はありません');return}$('confirmDialog').showModal()});
+  $('cancelClear').addEventListener('click',()=>$('confirmDialog').close());$('confirmClear').addEventListener('click',()=>{clearMarks();$('confirmDialog').close();$('hintText').textContent='線をなぞって、GOを押してね！';toast('線とあしあとをすべて消しました')});
   document.addEventListener('keydown',e=>{const active=document.activeElement?.tagName;if(active==='INPUT'||active==='TEXTAREA')return;if((e.metaKey||e.ctrlKey)&&e.key.toLowerCase()==='z'){e.preventDefault();undo()}});
-  // A touch or mouse trace creates a queue. The animal follows the entire actual trace.
+  // Draw any number of disjoint strokes first. The GO button starts their ordered traversal.
   function toWorld(e){const rect=stage.getBoundingClientRect();return {x:((e.clientX-rect.left)/rect.width-.5)*state.viewW,z:((e.clientY-rect.top)/rect.height-.5)*state.viewH}}
   function safePosition(p){const margin=Math.min(.31*state.animalScale,Math.min(state.pw,state.ph)*.2);return{x:clamp(p.x,-state.pw/2+margin,state.pw/2-margin),z:clamp(p.z,-state.ph/2+margin,state.ph/2-margin)}}
-  function appendPoint(raw){const p=safePosition(raw);let last=state.path[state.path.length-1]||{x:state.x,z:state.z};const len=hypot(p.x-last.x,p.z-last.z);if(len<.055*state.animalScale)return;
-    const spacing=.14*state.animalScale;const parts=Math.min(600,Math.ceil(len/spacing));for(let k=1;k<=parts&&state.path.length<1800;k++){state.path.push({x:last.x+(p.x-last.x)*(k/parts),z:last.z+(p.z-last.z)*(k/parts)})}
+  function appendPoint(stroke,raw){const p=safePosition(raw),points=stroke.points,last=points[points.length-1];
+    if(!last){points.push(p);return}
+    const distance=hypot(p.x-last.x,p.z-last.z),spacing=.11*state.animalScale;
+    if(distance<spacing*.42||points.length>=3000)return;
+    const steps=Math.ceil(distance/spacing);
+    for(let k=1;k<=steps&&points.length<3000;k++)points.push({x:last.x+(p.x-last.x)*k/steps,z:last.z+(p.z-last.z)*k/steps});
   }
-  stage.addEventListener('pointerdown',e=>{if(!state.started||e.target.closest('button')||e.target.closest('.welcome-card')||state.pointerId!==null)return;
-    const w=toWorld(e);if(Math.abs(w.x)>state.pw/2+.05||Math.abs(w.z)>state.ph/2+.05)return;
-    e.preventDefault();state.pointerId=e.pointerId;state.dragging=false;state.lastTouch=w;stopTravel();state.activeGroup=state.nextGroup++;state.groups.push(state.activeGroup);
-    state.stampAccum=0;appendPoint(w);state.traveling=true;stage.setPointerCapture?.(e.pointerId);updateCounter();
+  stage.addEventListener('pointerdown',e=>{
+    if(!state.started||state.playing||e.target.closest('button')||e.target.closest('.welcome-card')||state.pointerId!==null)return;
+    const w=toWorld(e);if(Math.abs(w.x)>state.pw/2+.01||Math.abs(w.z)>state.ph/2+.01)return;
+    e.preventDefault();state.pointerId=e.pointerId;state.lastTouch=w;state.drawingStroke={points:[]};appendPoint(state.drawingStroke,w);
+    stage.setPointerCapture?.(e.pointerId);updateToolbar();
   });
-  stage.addEventListener('pointermove',e=>{if(!state.started||state.pointerId!==e.pointerId)return;e.preventDefault();const p=toWorld(e);
-    if(hypot(p.x-state.lastTouch.x,p.z-state.lastTouch.z)>.085*state.animalScale){state.dragging=true;appendPoint(p);state.lastTouch=p}
+  stage.addEventListener('pointermove',e=>{if(!state.started||state.pointerId!==e.pointerId||!state.drawingStroke)return;
+    e.preventDefault();const p=toWorld(e);appendPoint(state.drawingStroke,p);state.lastTouch=p;
   });
-  function endPointer(e){if(state.pointerId!==e.pointerId)return;state.pointerId=null;state.dragging=false;state.lastTouch=null;if(stage.hasPointerCapture?.(e.pointerId))stage.releasePointerCapture(e.pointerId)}
+  function endPointer(e){if(state.pointerId!==e.pointerId)return;
+    if(state.drawingStroke){appendPoint(state.drawingStroke,toWorld(e));if(state.drawingStroke.points.length)state.draftStrokes.push(state.drawingStroke)}
+    state.drawingStroke=null;state.pointerId=null;state.lastTouch=null;
+    if(stage.hasPointerCapture?.(e.pointerId))stage.releasePointerCapture(e.pointerId);
+    $('hintText').textContent='線を描けたらGOを押してね！';updateToolbar();
+  }
   stage.addEventListener('pointerup',endPointer);stage.addEventListener('pointercancel',endPointer);
-  window.addEventListener('blur',()=>{if(state.pointerId!==null){state.pointerId=null;state.dragging=false}});
-  function moveAnimal(dt){const slow={slow:.64,normal:1.25,fast:2.25}[state.speed];let remaining=slow*dt*state.animalScale;
-    let travelDistance=0;let guard=0;
-    while(remaining>0&&state.path.length&&guard++<100){const p=state.path[0],dx=p.x-state.x,dz=p.z-state.z,dist=hypot(dx,dz);
-      if(dist<.001){state.path.shift();continue}
+  window.addEventListener('blur',()=>{if(state.pointerId!==null){state.pointerId=null;state.drawingStroke=null;state.lastTouch=null;updateToolbar()}});
+  function beginRun(){
+    if(!state.started){toast('まず写真を選んでください');return}
+    if(state.playing){stopTravel();$('hintText').textContent='中断しました。新しい線を描いてね';toast('おさんぽを中断しました');return}
+    if(!state.draftStrokes.length){toast('先に写真の上をなぞって線を描いてね');return}
+    state.queue=state.draftStrokes.map(stroke=>({points:stroke.points.map(p=>({...p})),group:state.nextGroup++}));
+    state.draftStrokes=[];state.runIndex=0;state.pointIndex=0;state.runMode='reposition';state.playing=true;
+    state.stampAccum=0;state.activeGroup=0;lockRouteSettings(true);
+    $('hintText').textContent='描いた線を順番におさんぽ中！';updateToolbar();
+  }
+  $('goBtn').addEventListener('click',beginRun);
+  function finishRun(){stopTravel();$('hintText').textContent='できあがり！さらに線を描くこともできるよ';toast('おさんぽ完了！ 足跡アートのできあがり 🐾')}
+  function moveAnimal(dt){
+    if(!state.playing)return false;
+    const speed={slow:.64,normal:1.25,fast:2.25}[state.speed];let remaining=speed*dt*state.animalScale;
+    let traveled=0,guard=0;
+    while(remaining>0&&state.playing&&guard++<150){
+      if(state.runIndex>=state.queue.length){finishRun();break}
+      const seg=state.queue[state.runIndex];
+      if(state.runMode==='reposition'){
+        const p=seg.points[0];if(!p){state.runIndex++;continue}
+        const dx=p.x-state.x,dz=p.z-state.z,dist=hypot(dx,dz);
+        if(dist<.002){
+          state.x=p.x;state.z=p.z;state.runMode='trace';state.pointIndex=1;state.activeGroup=seg.group;
+          state.stampAccum=0;state.footSide=1;
+          const next=seg.points[1]||{x:p.x,z:p.z-1};const deltaX=next.x-p.x,deltaZ=next.z-p.z,angle=hypot(deltaX,deltaZ)||1;
+          // The first mark is placed only at the beginning of the actual stroke, never on transfers.
+          pushMark(state.x,state.z,deltaX/angle,deltaZ/angle);updateToolbar();continue;
+        }
+        const vx=dx/dist,vz=dz/dist,move=Math.min(dist,remaining);
+        state.x+=vx*move;state.z+=vz*move;remaining-=move;traveled+=move;
+        const targetYaw=-Math.atan2(vx,-vz);let delta=targetYaw-state.yaw;delta=Math.atan2(Math.sin(delta),Math.cos(delta));state.yaw+=delta*Math.min(1,dt*13);
+        // Repositioning deliberately does not update stampAccum or push any mark.
+        continue;
+      }
+      if(state.pointIndex>=seg.points.length){
+        state.runIndex++;state.runMode='reposition';state.stampAccum=0;state.activeGroup=0;
+        if(state.runIndex>=state.queue.length){finishRun();break}updateToolbar();continue;
+      }
+      const p=seg.points[state.pointIndex],dx=p.x-state.x,dz=p.z-state.z,dist=hypot(dx,dz);
+      if(dist<.002){state.pointIndex++;continue}
       const vx=dx/dist,vz=dz/dist,move=Math.min(dist,remaining),oldx=state.x,oldz=state.z;
-      state.x+=vx*move;state.z+=vz*move;remaining-=move;travelDistance+=move;
+      state.x+=vx*move;state.z+=vz*move;remaining-=move;traveled+=move;
       const targetYaw=-Math.atan2(vx,-vz);let delta=targetYaw-state.yaw;delta=Math.atan2(Math.sin(delta),Math.cos(delta));state.yaw+=delta*Math.min(1,dt*13);
       state.stampAccum+=move;
-      const stride=animals[state.animal].step*state.animalScale*(state.speed==='fast'?1.11:state.speed==='slow'?.9:1);
-      let each=0;while(state.stampAccum>=stride&&each++<40){const overflow=state.stampAccum-stride;const t=move>0?clamp((move-overflow)/move,0,1):1;
-        pushMark(oldx+(state.x-oldx)*t,oldz+(state.z-oldz)*t,vx,vz);state.stampAccum-=stride}
-      if(move>=dist-.00001)state.path.shift();
+      const spec=animals[state.animal];
+      // Spacing increases proportionally with the chosen paw size. Bear/horse use 2x baseline stride.
+      const stride=spec.step*spec.strideMultiplier*state.animalScale*(state.size/spec.defaultSize)*(state.speed==='fast'?1.11:state.speed==='slow'?.9:1);
+      let repeat=0;
+      while(state.stampAccum>=stride&&repeat++<40){const overflow=state.stampAccum-stride;
+        const t=move>0?clamp((move-overflow)/move,0,1):1;
+        pushMark(oldx+(state.x-oldx)*t,oldz+(state.z-oldz)*t,vx,vz);state.stampAccum-=stride;
+      }
+      if(move>=dist-.00001)state.pointIndex++;
     }
-    if(travelDistance>0){state.motion+=travelDistance*9.5/state.animalScale;state.traveling=true}
-    else if(state.path.length===0)state.traveling=false;
-    return travelDistance>0;
+    if(traveled>0)state.motion+=traveled*9.5/state.animalScale;
+    state.traveling=state.playing&&traveled>0;return traveled>0;
   }
   // Matrix helpers are used for a true orthographic 3D WebGL renderer.
   function m4(){return new Float32Array([1,0,0,0, 0,1,0,0, 0,0,1,0, 0,0,0,1])}
@@ -378,13 +485,6 @@ dialog{border:0;border-radius:22px;padding:0;max-width:min(94vw,470px);box-shado
       part('sphere','#c5937a',-.43,1.065,-.36,.105,.11,.11);part('sphere','#c5937a',.43,1.065,-.36,.105,.11,.11);
       part('sphere','#ebcda8',0,.66,-.72,.27,.18,.23);eye(-.185,1.02,-.57,.052);eye(.185,1.02,-.57,.052);part('sphere','#4e3e38',0,.73,-.89,.089,.07,.07);
       part('sphere','#936544',0,.53,.81,.18,.15,.16,{tail:true});
-    }else if(type==='frog'){
-      part('sphere','#64be78',0,.29,.15,.49,.21,.44);part('sphere','#89d691',0,.31,-.24,.45,.25,.32);part('sphere','#b1e5a2',0,.20,-.34,.32,.11,.19);
-      part('sphere','#62b67c',-.45,.18,.44,.23,.15,.23,{leg:true,side:-1});part('sphere','#62b67c',.45,.18,.44,.23,.15,.23,{leg:true,side:1});
-      part('sphere','#62b67c',-.42,.065,-.31,.20,.085,.20,{leg:true,side:-1});part('sphere','#62b67c',.42,.065,-.31,.20,.085,.20,{leg:true,side:1});
-      part('sphere','#57ae6c',-.26,.56,-.44,.18,.19,.19);part('sphere','#57ae6c',.26,.56,-.44,.18,.19,.19);
-      part('sphere','#ffffff',-.26,.65,-.52,.115,.12,.11);part('sphere','#ffffff',.26,.65,-.52,.115,.12,.11);
-      eye(-.26,.735,-.57,.055);eye(.26,.735,-.57,.055);part('sphere','#f49b9b',-.34,.395,-.53,.105,.06,.09);part('sphere','#f49b9b',.34,.395,-.53,.105,.06,.09);
     }else if(type==='horse'){
       part('sphere','#b98251',0,.70,.20,.39,.34,.68);part('sphere','#d49a61',0,.69,.17,.34,.31,.53);
       for(const x of [-.25,.25])for(const z of [-.34,.53]){part('cylinder','#a86d46',x,.32,z,.11,.53,.12,{leg:true,legFront:z<0,side:x<0?-1:1});part('sphere','#514438',x,.09,z-.035,.16,.10,.18,{leg:true,legFront:z<0,side:x<0?-1:1})}
@@ -398,7 +498,6 @@ dialog{border:0;border-radius:22px;padding:0;max-width:min(94vw,470px);box-shado
   }
   const parts=Object.fromEntries(Object.keys(animals).map(k=>[k,buildAnimalParts(k)]));
   function drawAnimal(scene,moving){let phase=state.motion,bob=moving?Math.abs(Math.sin(phase))*.045:Math.sin(performance.now()*.0017)*.012;
-    if(state.animal==='frog'&&moving)bob+=Math.abs(Math.sin(phase*.67))*.12;
     const base=mm(mm(mt(state.x,.06+bob,state.z),ry(state.yaw)),ms(state.animalScale,state.animalScale,state.animalScale));
     for(const part of parts[state.animal]){
       let [x,y,z]=part.pos;const [sx,sy,sz]=part.scale;
@@ -411,11 +510,21 @@ dialog{border:0;border-radius:22px;padding:0;max-width:min(94vw,470px);box-shado
       scene.draw(mesh,model,hexRGBA(part.color),null,[state.animalScale*sx,state.animalScale*sy,state.animalScale*sz]);
     }
   }
-  function paintGuide(){const ctx=guide2d,W=guideCanvas.width,H=guideCanvas.height;ctx.clearRect(0,0,W,H);if(!state.path.length||!state.started)return;
-    const pts=[{x:state.x,z:state.z},...state.path];const sx=W/state.viewW,sz=H/state.viewH;
-    ctx.save();ctx.beginPath();ctx.moveTo((pts[0].x/state.viewW+.5)*W,(pts[0].z/state.viewH+.5)*H);
-    for(let i=1;i<pts.length;i++)ctx.lineTo((pts[i].x/state.viewW+.5)*W,(pts[i].z/state.viewH+.5)*H);
-    ctx.strokeStyle='#ffffffd9';ctx.lineWidth=5*(W/stage.clientWidth);ctx.lineJoin='round';ctx.lineCap='round';ctx.stroke();ctx.strokeStyle='#5e9a72cc';ctx.lineWidth=2*(W/stage.clientWidth);ctx.setLineDash([7*(W/stage.clientWidth),6*(W/stage.clientWidth)]);ctx.stroke();ctx.restore();
+  function paintGuide(){
+    const ctx=guide2d,W=guideCanvas.width,H=guideCanvas.height;ctx.clearRect(0,0,W,H);if(!state.started)return;
+    const px=p=>(p.x/state.viewW+.5)*W,py=p=>(p.z/state.viewH+.5)*H,k=W/stage.clientWidth;
+    const strokes=state.playing?state.queue.slice(state.runIndex).map((s,i)=>({points:i===0&&state.runMode==='trace'?[{x:state.x,z:state.z},...s.points.slice(state.pointIndex)]:s.points})):[...state.draftStrokes,state.drawingStroke].filter(Boolean);
+    ctx.save();ctx.lineCap='round';ctx.lineJoin='round';
+    for(let i=0;i<strokes.length;i++){
+      const points=strokes[i].points;if(!points.length)continue;
+      ctx.beginPath();ctx.moveTo(px(points[0]),py(points[0]));
+      for(let j=1;j<points.length;j++)ctx.lineTo(px(points[j]),py(points[j]));
+      ctx.strokeStyle='rgba(255,255,255,.97)';ctx.lineWidth=6*k;ctx.setLineDash([]);ctx.stroke();
+      ctx.strokeStyle=state.playing?'#e69e55e6':'#4f9675ed';ctx.lineWidth=3*k;ctx.setLineDash([8*k,5*k]);ctx.stroke();ctx.setLineDash([]);
+      ctx.beginPath();ctx.arc(px(points[0]),py(points[0]),5*k,0,2*Math.PI);ctx.fillStyle=state.playing?'#e4a657':'#3f8f6b';ctx.fill();
+      ctx.beginPath();ctx.arc(px(points[0]),py(points[0]),2.3*k,0,2*Math.PI);ctx.fillStyle='#fff';ctx.fill();
+    }
+    ctx.restore();
   }
   function tick(t){let dt=lastFrame?Math.min(.05,(t-lastFrame)/1000):0;lastFrame=t;const moving=state.started?moveAnimal(dt):false;
     if(scene3d){scene3d.render(dt,moving);paintGuide()}frameId=requestAnimationFrame(tick)}
@@ -441,10 +550,10 @@ dialog{border:0;border-radius:22px;padding:0;max-width:min(94vw,470px);box-shado
     finally{btn.disabled=false;btn.textContent=label}
   }
   $('saveBtn').addEventListener('click',()=>produceImage('save'));$('quickSaveBtn').addEventListener('click',()=>produceImage('save'));$('shareBtn').addEventListener('click',()=>produceImage('share'));
-  try{scene3d=new Mini3D(glCanvas);const sample=generateSample();usePhoto(sample,'サンプルの原っぱ',true);state.started=false;$('welcome').hidden=false;updateCounter();
+  try{scene3d=new Mini3D(glCanvas);const sample=generateSample();usePhoto(sample,'サンプルの原っぱ',true);state.started=false;$('welcome').hidden=false;updateToolbar();
     if('ResizeObserver'in window)new ResizeObserver(()=>scene3d.resize()).observe(stage);else window.addEventListener('resize',()=>scene3d.resize());
     document.addEventListener('visibilitychange',()=>{lastFrame=0});frameId=requestAnimationFrame(tick);
-  }catch(e){console.warn('WebGLを利用できないため2D描画に切り替えます:',e);try{scene3d=new Mini2D(glCanvas);gl=null;const sample=generateSample();usePhoto(sample,'サンプルの原っぱ',true);state.started=false;$('welcome').hidden=false;updateCounter();if('ResizeObserver'in window)new ResizeObserver(()=>scene3d.resize()).observe(stage);else window.addEventListener('resize',()=>scene3d.resize());frameId=requestAnimationFrame(tick);toast('この環境では軽量表示モードで動作します')}catch(f){console.error(f);$('hintText').textContent='描画を開始できません。ブラウザを更新してください。'}}
+  }catch(e){console.warn('WebGLを利用できないため2D描画に切り替えます:',e);try{scene3d=new Mini2D(glCanvas);gl=null;const sample=generateSample();usePhoto(sample,'サンプルの原っぱ',true);state.started=false;$('welcome').hidden=false;updateToolbar();if('ResizeObserver'in window)new ResizeObserver(()=>scene3d.resize()).observe(stage);else window.addEventListener('resize',()=>scene3d.resize());frameId=requestAnimationFrame(tick);toast('この環境では軽量表示モードで動作します')}catch(f){console.error(f);$('hintText').textContent='描画を開始できません。ブラウザを更新してください。'}}
   // Public non-sensitive debug state for automated cross-browser smoke tests.
   window.__ashiatoTest={state,previewCanvas,getPartCount:()=>parts[state.animal].length,buildPNG};
 })();
