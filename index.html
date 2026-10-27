@@ -72,6 +72,83 @@ dialog{border:0;border-radius:22px;padding:0;max-width:min(94vw,470px);box-shado
 .template-badge{display:inline-flex;align-items:center;gap:5px;background:#eef5ef;color:#4d7a60;padding:5px 8px;border-radius:999px;font-size:10px;font-weight:900}
 .template-badge::before{content:"";width:7px;height:7px;border-radius:50%;background:#75b288}
 
+
+/* V4: compact, photo-first studio. Primary actions remain on the photo. */
+.sr-only{position:absolute!important;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+.stage-top{top:11px;left:11px;right:11px;display:block;z-index:5;pointer-events:none}
+.stage-top .walk-toolbar-buttons{width:100%;display:grid;grid-template-columns:1.04fr 1fr .88fr;gap:7px;pointer-events:auto}
+.stage-top .walk-toolbar-buttons .btn{width:100%;min-width:0;height:42px;min-height:42px;padding:5px 6px;border-radius:12px;background:#fffffff0;color:#355845;box-shadow:0 4px 16px #193c292d;border:1px solid #e0e8df;font-size:12px;white-space:nowrap;backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px)}
+.stage-top .walk-toolbar-buttons .go-btn{color:#fff;background:#376b53;border-color:#376b53;font-size:17px;letter-spacing:.02em;box-shadow:0 5px 15px #2a62494d}
+.stage-top .walk-toolbar-buttons .go-btn[data-running="true"]{background:#c85f54;border-color:#c85f54;font-size:13px}
+.stage-top .stage-label{position:absolute;top:47px;right:0;left:auto;max-width:58%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;padding:5px 9px;font-size:9px;background:#ffffffe6;pointer-events:none}
+.template-workbench{background:#fff;border:1px solid #e1e9e0;border-radius:17px;box-shadow:0 5px 25px #1a382010;padding:10px 12px 11px;margin-top:9px}
+.template-topline{display:flex;align-items:center;gap:11px;margin-bottom:7px}
+.template-title{display:flex;align-items:center;gap:9px;flex:none}
+.template-title b{font-weight:900;font-size:13px;color:#3d624d}
+.template-title span{font-size:10px;color:#819084;font-weight:700}
+.template-workbench .template-grid{flex:1;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:6px}
+.template-workbench .template-btn{font-size:22px;min-width:0;min-height:35px;height:35px;border-radius:10px;padding:3px 0;line-height:1}
+.template-adjust-grid{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));column-gap:12px;row-gap:3px}
+.tpl-adjust{grid-column:span 2;min-width:0}
+.tpl-adjust:nth-child(4),.tpl-adjust:nth-child(5){grid-column:span 3}
+.tpl-adjust label{display:flex;justify-content:space-between;align-items:center;gap:5px;font-size:10px;line-height:1.25;font-weight:800;color:#627265;min-height:17px}
+.tpl-adjust output{font-size:10px;font-weight:900;color:#387451;white-space:nowrap}
+.tpl-adjust input[type=range]{margin:8px 0 5px;height:5px;touch-action:pan-x}
+.tpl-adjust input[type=range]::-webkit-slider-thumb{width:20px;height:20px}
+.template-bottomline{display:flex;align-items:center;gap:7px;justify-content:flex-end;margin-top:6px}
+.template-bottomline .template-badge{margin-right:auto;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-size:10px;padding:5px 7px;max-width:36%}
+.tpl-mini-btn{font-size:10px;font-weight:850;color:#4b6d58;background:#eff5ef;border:0;border-radius:9px;min-height:35px;padding:6px 9px;white-space:nowrap}
+.tpl-add-btn{min-height:35px;padding:7px 12px;font-size:11px;border-radius:9px;box-shadow:none}
+.stage-footnote{margin-top:0;padding:5px 4px;font-size:10px}
+@media(max-width:740px){
+ .shell{padding-top:8px;padding-bottom:20px}
+ .app-header{margin-bottom:7px}
+ .animal-panel{margin-bottom:7px;padding:7px 9px 8px}
+ .animal-panel .panel-title{margin-bottom:3px}
+ .animal-btn{padding:2px 0 3px;gap:0}
+ .animal-icon{height:27px;font-size:23px}
+ .stage{height:clamp(240px,38dvh,430px);border-radius:15px}
+ .stage-top .walk-toolbar-buttons .btn{height:39px;min-height:39px;font-size:11px}
+ .stage-top .walk-toolbar-buttons .go-btn{font-size:16px}
+ .stage-top .stage-label{top:43px}
+ .template-workbench{margin-top:7px;padding:7px 9px 8px;border-radius:13px}
+ .template-title span{display:none}
+ .template-title b{font-size:12px}
+ .template-topline{gap:7px;margin-bottom:7px}
+ .template-workbench .template-btn{height:33px;min-height:33px;font-size:21px}
+ .tpl-adjust input[type=range]{margin:7px 0 4px}
+ .template-bottomline{margin-top:4px;gap:5px}
+ .template-bottomline .template-badge{font-size:9px}
+ .tpl-mini-btn{min-height:33px;padding:5px 7px}
+ .tpl-add-btn{min-height:33px;font-size:10px;padding:5px 9px}
+ .stage-footnote{display:none}
+ .stage-guide{bottom:11px}
+}
+@media(max-width:410px){
+ .stage{height:clamp(233px,36.5dvh,355px)}
+ .stage-top .walk-toolbar-buttons .btn{font-size:10px;padding:4px 4px}
+ .stage-top .walk-toolbar-buttons .go-btn{font-size:15px}
+ .template-workbench .template-grid{gap:4px}
+ .template-adjust-grid{column-gap:9px}
+ .template-bottomline .template-badge{display:none}
+ .template-bottomline .tpl-add-btn{margin-left:auto}
+ .app-header .header-right>.btn{font-size:10px;padding:9px 7px}
+}
+@media(max-height:660px) and (max-width:740px){.stage{height:clamp(218px,35dvh,290px)}.stage-guide{display:none}}
+
+
+@media(min-width:741px){
+ .animal-panel{display:flex;align-items:center;gap:13px;min-height:64px;padding:8px 12px;margin-bottom:10px}
+ .animal-panel .panel-title{display:block;min-width:175px;margin-bottom:0}
+ .animal-panel .panel-title small{display:block;margin-top:4px}
+ .animal-panel .animal-options{flex:1}
+ .animal-panel .animal-btn{flex-direction:row;gap:6px;min-height:47px;padding:4px}
+ .animal-panel .animal-icon{font-size:26px;height:34px;width:37px}
+ .stage{height:clamp(325px,54dvh,600px)}
+ .stage-top .walk-toolbar-buttons{max-width:420px;margin-left:auto}
+ .stage-top .stage-label{top:4px;left:0;right:auto;max-width:calc(100% - 430px)}
+}
+
 </style>
 </head>
 <body>
@@ -93,19 +170,43 @@ dialog{border:0;border-radius:22px;padding:0;max-width:min(94vw,470px);box-shado
   </div>
   <div class="stage" id="stage" aria-label="写真の上をなぞって動物を歩かせる領域">
    <canvas id="glCanvas" aria-hidden="true"></canvas><canvas id="guideCanvas" aria-hidden="true"></canvas>
-   <div class="stage-top"><span class="stage-label" id="photoLabel">🌿 サンプルの原っぱ</span></div>
+   <div class="stage-top" aria-label="おさんぽ操作">
+     <div class="walk-toolbar-buttons">
+       <button type="button" class="btn btn-subtle" id="undoBtn">↶ ひとつ戻す</button>
+       <button type="button" class="btn btn-subtle" id="clearBtn">♲ 全部けす</button>
+       <button type="button" class="btn go-btn" id="goBtn" disabled>▶ GO</button>
+     </div>
+     <span class="stage-label" id="photoLabel">🌿 サンプルの原っぱ</span>
+     <div class="sr-only" aria-live="polite"><b id="walkStatus">① 写真の上に線を描こう</b><small id="walkSubstatus">手描きもテンプレもOK！ GOで順番に歩きます</small></div>
+   </div>
    <button id="quickSaveBtn" class="quick-save" type="button">↓ PNGを保存</button><div class="stage-guide"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round"><path d="M8 14a2 2 0 1 1-4 0 2 2 0 0 1 4 0ZM13 7a2 2 0 1 1-4 0 2 2 0 0 1 4 0ZM20 9a2 2 0 1 1-4 0 2 2 0 0 1 4 0Z"/><path d="M8 19c2-3 4-5 7-5 2 0 4 1 4 4"/></svg><span id="hintText">線をなぞって、GOでおさんぽ！</span></div>
    <div class="welcome" id="welcome"><div class="welcome-card"><div class="welcome-animals">🐶 🐱 🐻 🐴</div><h2>写真の上で、<br><span>あしあとさんぽ。</span></h2><p>お気に入りの写真が、どうぶつたちの遊び場に。<br>好きな線を描いてGO！とことこ歩いて足跡アートを作ろう。</p><button class="btn btn-green" id="pickPhotoWelcome" type="button">🖼️ 写真をえらんで遊ぶ</button><button class="btn btn-light" id="playSample" type="button">🌿 サンプルの原っぱで遊ぶ</button><small>無料・ログイン不要・写真のアップロードなし</small></div></div>
   </div>
-  <div class="walk-toolbar" aria-label="コースの編集とおさんぽ開始">
-   <div class="walk-toolbar-info"><b id="walkStatus">① 写真の上に線を描こう</b><small id="walkSubstatus">手描きもテンプレもOK！ GOで順番に歩きます</small></div>
-   <div class="walk-toolbar-buttons">
-    <button type="button" class="btn btn-subtle" id="undoBtn">↶ ひとつ戻す</button>
-    <button type="button" class="btn btn-subtle" id="clearBtn">♲ 全部けす</button>
-    <button type="button" class="btn go-btn" id="goBtn" disabled>▶ GO</button>
-   </div>
-  </div>
-  <div class="stage-footnote"><span><span class="indicator"></span>① 線をなぞる → ② GOで歩く（線の間は足跡なし）</span><span>どうぶつ：<b id="activeAnimalName">🐶 いぬ</b></span></div>
+  <section class="template-workbench" id="templateSection" aria-label="テンプレートを写真の下で調整する">
+    <div class="template-topline">
+      <div class="template-title"><b>✨ かたち</b><span>写真を見ながら調整</span></div>
+      <div class="template-grid" id="templateShapeGrid">
+        <button type="button" class="template-btn" data-shape="circle" aria-label="まる" aria-pressed="true">○</button>
+        <button type="button" class="template-btn" data-shape="square" aria-label="しかく" aria-pressed="false">□</button>
+        <button type="button" class="template-btn" data-shape="star" aria-label="ほし" aria-pressed="false">☆</button>
+        <button type="button" class="template-btn" data-shape="heart" aria-label="ハート" aria-pressed="false">♡</button>
+      </div>
+    </div>
+    <div class="template-adjust-grid">
+      <div class="tpl-adjust"><label for="templateWidthRange">横幅 <output id="templateWidthOut">40%</output></label><input type="range" id="templateWidthRange" min="20" max="90" value="40" step="1" style="--fill:29%"></div>
+      <div class="tpl-adjust"><label for="templateHeightRange">縦幅 <output id="templateHeightOut">40%</output></label><input type="range" id="templateHeightRange" min="20" max="90" value="40" step="1" style="--fill:29%"></div>
+      <div class="tpl-adjust"><label for="templateRotateRange">回転 <output id="templateRotateOut">0°</output></label><input type="range" id="templateRotateRange" min="-180" max="180" value="0" step="5" style="--fill:50%"></div>
+      <div class="tpl-adjust"><label for="templateXRange">左右 <output id="templateXOut">中央</output></label><input type="range" id="templateXRange" min="0" max="100" value="50" step="1" style="--fill:50%"></div>
+      <div class="tpl-adjust"><label for="templateYRange">上下 <output id="templateYOut">中央</output></label><input type="range" id="templateYRange" min="0" max="100" value="50" step="1" style="--fill:50%"></div>
+    </div>
+    <div class="template-bottomline">
+      <span class="template-badge" id="templateBadge">○ まる を表示中</span>
+      <button type="button" class="tpl-mini-btn" id="toggleTemplateBtn">かくす</button>
+      <button type="button" class="tpl-mini-btn" id="centerTemplateBtn">中央に戻す</button>
+      <button type="button" class="btn btn-green tpl-add-btn" id="addTemplateBtn">＋ コースに追加</button>
+    </div>
+  </section>
+  <div class="stage-footnote"><span><span class="indicator"></span>① 線を描く / 形を追加 → ② GO（移動中は足跡なし）</span><span>どうぶつ：<b id="activeAnimalName">🐶 いぬ</b></span></div>
  </section>
  <aside class="controls" aria-label="あしあと設定と保存">
   <section class="ctrl-section"><div class="ctrl-header"><div class="ctrl-heading"><span class="roundicon">🎨</span><strong>あしあとカラー</strong></div><span class="mini">好きな色に！</span></div>
@@ -119,25 +220,9 @@ dialog{border:0;border-radius:22px;padding:0;max-width:min(94vw,470px);box-shado
       <label class="color-input-wrap" title="自分で色を選ぶ"><input id="customColor" type="color" value="#353a39" aria-label="自由な色を選択"></label>
     </div>
     <label class="form-label" for="sizeRange">あしあとの大きさ <output id="sizeOut">80%</output></label><input type="range" id="sizeRange" min="50" max="200" value="80" step="5" style="--fill:20%">
-    <label class="form-label" for="opacityRange">あしあとの濃さ <output id="opacityOut">85%</output></label><input type="range" id="opacityRange" min="0" max="100" value="85" step="5" style="--fill:85%">
+    <label class="form-label" for="opacityRange">あしあとの濃さ <output id="opacityOut">100%</output></label><input type="range" id="opacityRange" min="0" max="100" value="100" step="5" style="--fill:100%">
   </section>
   <section class="ctrl-section"><div class="ctrl-header"><div class="ctrl-heading"><span class="roundicon">🐾</span><strong>あるくスピード</strong></div></div><div class="segment" id="speedSegment"><button type="button" class="speed-btn" data-speed="slow" aria-pressed="false">のんびり</button><button type="button" class="speed-btn" data-speed="normal" aria-pressed="true">ふつう</button><button type="button" class="speed-btn" data-speed="fast" aria-pressed="false">はやい</button></div></section>
-  <section class="ctrl-section" id="templateSection"><div class="ctrl-header"><div class="ctrl-heading"><span class="roundicon">✨</span><strong>かたちテンプレート</strong></div><span class="mini">○ □ ☆ ♡</span></div>
-    <div class="template-grid" id="templateShapeGrid">
-      <button type="button" class="template-btn" data-shape="circle" aria-pressed="true">○<small>まる</small></button>
-      <button type="button" class="template-btn" data-shape="square" aria-pressed="false">□<small>しかく</small></button>
-      <button type="button" class="template-btn" data-shape="star" aria-pressed="false">☆<small>ほし</small></button>
-      <button type="button" class="template-btn" data-shape="heart" aria-pressed="false">♡<small>ハート</small></button>
-    </div>
-    <div style="display:flex;justify-content:space-between;align-items:center;margin-top:10px"><span class="template-badge" id="templateBadge">テンプレ表示中</span><button type="button" class="btn btn-light" id="toggleTemplateBtn" style="padding:8px 11px;font-size:11px">かくす</button></div>
-    <label class="form-label" for="templateWidthRange">よこ幅 <output id="templateWidthOut">40%</output></label><input type="range" id="templateWidthRange" min="20" max="90" value="40" step="1" style="--fill:29%">
-    <label class="form-label" for="templateHeightRange">たて幅 <output id="templateHeightOut">40%</output></label><input type="range" id="templateHeightRange" min="20" max="90" value="40" step="1" style="--fill:29%">
-    <label class="form-label" for="templateRotateRange">回転 <output id="templateRotateOut">0°</output></label><input type="range" id="templateRotateRange" min="-180" max="180" value="0" step="5" style="--fill:50%">
-    <label class="form-label" for="templateXRange">左右の位置 <output id="templateXOut">中央</output></label><input type="range" id="templateXRange" min="0" max="100" value="50" step="1" style="--fill:50%">
-    <label class="form-label" for="templateYRange">上下の位置 <output id="templateYOut">中央</output></label><input type="range" id="templateYRange" min="0" max="100" value="50" step="1" style="--fill:50%">
-    <div class="template-actions"><button type="button" class="btn btn-subtle" id="centerTemplateBtn">中央にもどす</button><button type="button" class="btn btn-green" id="addTemplateBtn">＋ コースに追加</button></div>
-    <div class="template-note">テンプレートの点線を写真に重ねて調整し、「コースに追加」で線として登録します。登録後はGOで歩けて、ひとつ戻すにも対応します。</div>
-  </section>
   <section class="ctrl-section"><div class="toggle-line"><div><b>あしあとを残す</b><small>OFFなら足跡を残しません</small></div><button id="stampsToggle" class="switch" type="button" role="switch" aria-label="あしあとを残す" aria-checked="true"></button></div></section>
   <div class="save-panel"><button type="button" id="saveBtn" class="btn btn-green savebtn">✦ あしあと画像を保存</button><button type="button" id="shareBtn" class="btn btn-light sharebtn">↗ 画像を共有する</button><div class="action-caption">元画像のサイズを保ってPNGに保存。<br>動物やボタンは写りません。</div></div>
  </aside>
@@ -164,13 +249,14 @@ dialog{border:0;border-radius:22px;padding:0;max-width:min(94vw,470px);box-shado
     bear:{name:'くま',emoji:'🐻',step:.28,spread:.19,print:.47,defaultSize:75,strideMultiplier:2},
     horse:{name:'うま',emoji:'🐴',step:.29,spread:.16,print:.41,defaultSize:80,strideMultiplier:2}
   };
-  const state={animal:'dog',color:'#353a39',size:80,opacity:.85,speed:'normal',stampsOn:true,started:false,
+  const state={animal:'dog',color:'#353a39',size:80,opacity:1,speed:'normal',stampsOn:true,started:false,
     photo:null,photoName:'サンプルの原っぱ',pw:10,ph:7.5,animalScale:1,x:0,z:0,yaw:0,
     draftStrokes:[],drawingStroke:null,pointerId:null,lastTouch:null,
     queue:[],runIndex:0,pointIndex:0,runMode:'',playing:false,groups:[],marks:[],nextGroup:1,activeGroup:0,
     stampAccum:0,footSide:1,motion:0,traveling:false,viewW:12,viewH:9,
     template:{active:true,shape:'circle',widthPct:40,heightPct:40,rotation:0,xPct:50,yPct:50,cx:0,cz:0,w:4,h:4},
-    sizeByAnimal:Object.fromEntries(Object.entries(animals).map(([k,a])=>[k,a.defaultSize]))};
+    sizeByAnimal:Object.fromEntries(Object.entries(animals).map(([k,a])=>[k,a.defaultSize])),
+    opacityByAnimal:Object.fromEntries(Object.keys(animals).map(k=>[k,100]))};
   // Footprints are kept in photo-local normalized coordinates, independent of screen resolution.
   let previewCanvas=document.createElement('canvas'),previewCtx=previewCanvas.getContext('2d',{alpha:true});
   let gl=null,scene3d=null,photoTexture=null,printsTexture=null,shadowTexture=null,frameId=0,lastFrame=0,lastPhotoURL=null;
@@ -179,7 +265,13 @@ dialog{border:0;border-radius:22px;padding:0;max-width:min(94vw,470px);box-shado
   function lerp(a,b,t){return a+(b-a)*t}
   function shapeLabel(shape){return({circle:'○ まる',square:'□ しかく',star:'☆ ほし',heart:'♡ ハート'})[shape]||'テンプレ'}
   function templateBounds(width,height,rotation){const c=Math.cos(rotation),s=Math.sin(rotation);return{ex:Math.abs(c)*width/2+Math.abs(s)*height/2,ez:Math.abs(s)*width/2+Math.abs(c)*height/2}}
-  function computeTemplateGeometry(){const tpl=state.template;tpl.w=state.pw*tpl.widthPct/100;tpl.h=state.ph*tpl.heightPct/100;const b=templateBounds(tpl.w,tpl.h,tpl.rotation);tpl.cx=lerp(-state.pw/2+b.ex,state.pw/2-b.ex,tpl.xPct/100);tpl.cz=lerp(-state.ph/2+b.ez,state.ph/2-b.ez,tpl.yPct/100)}
+  function computeTemplateGeometry(){const tpl=state.template;tpl.w=state.pw*tpl.widthPct/100;tpl.h=state.ph*tpl.heightPct/100;
+    const safeMargin=Math.min(.31*state.animalScale,Math.min(state.pw,state.ph)*.2)+.015;
+    let b=templateBounds(tpl.w,tpl.h,tpl.rotation);
+    const fit=Math.min(1,(state.pw-2*safeMargin)/Math.max(.001,b.ex*2),(state.ph-2*safeMargin)/Math.max(.001,b.ez*2));
+    tpl.w*=fit;tpl.h*=fit;b=templateBounds(tpl.w,tpl.h,tpl.rotation);
+    tpl.cx=lerp(-state.pw/2+safeMargin+b.ex,state.pw/2-safeMargin-b.ex,tpl.xPct/100);
+    tpl.cz=lerp(-state.ph/2+safeMargin+b.ez,state.ph/2-safeMargin-b.ez,tpl.yPct/100)}
   function updateTemplateOutputs(){const tpl=state.template;computeTemplateGeometry();$('templateWidthOut').textContent=`${Math.round(tpl.widthPct)}%`;$('templateHeightOut').textContent=`${Math.round(tpl.heightPct)}%`;$('templateRotateOut').textContent=`${Math.round(tpl.rotation*180/Math.PI)}°`;const fmtPos=(pct)=>Math.abs(pct-50)<1?'中央':pct<50?`左 ${Math.round(50-pct)}%`:`右 ${Math.round(pct-50)}%`;const fmtY=(pct)=>Math.abs(pct-50)<1?'中央':pct<50?`上 ${Math.round(50-pct)}%`:`下 ${Math.round(pct-50)}%`;$('templateXOut').textContent=fmtPos(tpl.xPct);$('templateYOut').textContent=fmtY(tpl.yPct);['templateWidthRange','templateHeightRange','templateRotateRange','templateXRange','templateYRange'].forEach(id=>{const el=$(id);el.style.setProperty('--fill',`${(Number(el.value)-Number(el.min))/(Number(el.max)-Number(el.min))*100}%`)});$('templateBadge').textContent=tpl.active?`${shapeLabel(tpl.shape)} を表示中`:'テンプレ非表示';$('toggleTemplateBtn').textContent=tpl.active?'かくす':'ひょうじ'}
   function resetTemplatePosition(){state.template.widthPct=40;state.template.heightPct=40;state.template.rotation=0;state.template.xPct=50;state.template.yPct=50;$('templateWidthRange').value=state.template.widthPct;$('templateHeightRange').value=state.template.heightPct;$('templateRotateRange').value=0;$('templateXRange').value=50;$('templateYRange').value=50;updateTemplateOutputs()}
   function localToTemplateWorld(lx,lz){const tpl=state.template,c=Math.cos(tpl.rotation),s=Math.sin(tpl.rotation);return safePosition({x:tpl.cx+(lx*tpl.w)*c-(lz*tpl.h)*s,z:tpl.cz+(lx*tpl.w)*s+(lz*tpl.h)*c})}
@@ -302,13 +394,14 @@ dialog{border:0;border-radius:22px;padding:0;max-width:min(94vw,470px);box-shado
     state.animal=btn.dataset.animal;
     document.querySelectorAll('.animal-btn').forEach(el=>el.setAttribute('aria-pressed',String(el===btn)));
     $('sizeRange').value=String(state.sizeByAnimal[state.animal]);setSlider($('sizeRange'),$('sizeOut'));
+    $('opacityRange').value=String(state.opacityByAnimal[state.animal]);setSlider($('opacityRange'),$('opacityOut'));
     $out('activeAnimalName',`${animals[state.animal].emoji} ${animals[state.animal].name}`);
     toast(`${animals[state.animal].emoji} ${animals[state.animal].name}にチェンジ！ あしあと ${state.size}%`);
   }));
   document.querySelectorAll('.swatch').forEach(btn=>btn.addEventListener('click',()=>setColor(btn.dataset.color)));
   function setColor(color){state.color=color;$('customColor').value=color;document.querySelectorAll('.swatch').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.color.toLowerCase()===color.toLowerCase())))}
   $('customColor').addEventListener('input',e=>setColor(e.target.value));
-  function setSlider(input,output){let v=Number(input.value);state[input.id==='sizeRange'?'size':'opacity']=input.id==='sizeRange'?v:v/100;if(input.id==='sizeRange')state.sizeByAnimal[state.animal]=v;output.textContent=`${v}%`;input.style.setProperty('--fill',`${(v-Number(input.min))/(Number(input.max)-Number(input.min))*100}%`)}
+  function setSlider(input,output){let v=Number(input.value);state[input.id==='sizeRange'?'size':'opacity']=input.id==='sizeRange'?v:v/100;if(input.id==='sizeRange')state.sizeByAnimal[state.animal]=v;else state.opacityByAnimal[state.animal]=v;output.textContent=`${v}%`;input.style.setProperty('--fill',`${(v-Number(input.min))/(Number(input.max)-Number(input.min))*100}%`)}
   ['sizeRange','opacityRange'].forEach(id=>{$(id).addEventListener('input',()=>setSlider($(id),$(id==='sizeRange'?'sizeOut':'opacityOut')));setSlider($(id),$(id==='sizeRange'?'sizeOut':'opacityOut'))});
   document.querySelectorAll('.speed-btn').forEach(btn=>btn.addEventListener('click',()=>{state.speed=btn.dataset.speed;document.querySelectorAll('.speed-btn').forEach(b=>b.setAttribute('aria-pressed',String(b===btn)))}));
   document.querySelectorAll('.template-btn').forEach(btn=>btn.addEventListener('click',()=>{state.template.shape=btn.dataset.shape;state.template.active=true;document.querySelectorAll('.template-btn').forEach(b=>b.setAttribute('aria-pressed',String(b===btn)));updateTemplateOutputs();toast(`${shapeLabel(state.template.shape)} テンプレを選びました`)}));
