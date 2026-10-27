@@ -62,6 +62,16 @@ dialog{border:0;border-radius:22px;padding:0;max-width:min(94vw,470px);box-shado
 @media(max-width:1140px){.walk-toolbar{flex-direction:column;align-items:stretch;gap:9px}.walk-toolbar-buttons{display:grid;grid-template-columns:1fr 1fr 1.05fr;width:100%}.walk-toolbar-buttons .btn{min-width:0;padding:11px 5px}}
 @media(max-width:740px){.walk-toolbar{margin-top:8px;padding:10px 11px;border-radius:14px}.walk-toolbar-info b{font-size:12px}.walk-toolbar-buttons .go-btn{min-width:0}.stage-guide{max-width:calc(100% - 20px);white-space:normal;text-align:center;line-height:1.3}}
 @media(max-width:410px){.walk-toolbar-buttons .btn{font-size:10px}.walk-toolbar-buttons .go-btn{font-size:15px}}
+
+.template-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:6px}
+.template-btn{border:2px solid transparent;border-radius:11px;background:#f8faf7;color:#5b6a61;font-weight:900;font-size:18px;padding:10px 0;min-height:42px;transition:all .15s}
+.template-btn small{display:block;font-size:10px;letter-spacing:.01em;margin-top:2px}
+.template-btn[aria-pressed="true"]{background:#edf7ef;border-color:#7db68f;color:#2f684b;box-shadow:0 3px 10px #58896814}
+.template-actions{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:12px}.template-actions .btn{padding:11px 8px;font-size:11px}
+.template-note{font-size:10px;font-weight:700;color:#8b988e;line-height:1.6;margin-top:10px}
+.template-badge{display:inline-flex;align-items:center;gap:5px;background:#eef5ef;color:#4d7a60;padding:5px 8px;border-radius:999px;font-size:10px;font-weight:900}
+.template-badge::before{content:"";width:7px;height:7px;border-radius:50%;background:#75b288}
+
 </style>
 </head>
 <body>
@@ -88,7 +98,7 @@ dialog{border:0;border-radius:22px;padding:0;max-width:min(94vw,470px);box-shado
    <div class="welcome" id="welcome"><div class="welcome-card"><div class="welcome-animals">🐶 🐱 🐻 🐴</div><h2>写真の上で、<br><span>あしあとさんぽ。</span></h2><p>お気に入りの写真が、どうぶつたちの遊び場に。<br>好きな線を描いてGO！とことこ歩いて足跡アートを作ろう。</p><button class="btn btn-green" id="pickPhotoWelcome" type="button">🖼️ 写真をえらんで遊ぶ</button><button class="btn btn-light" id="playSample" type="button">🌿 サンプルの原っぱで遊ぶ</button><small>無料・ログイン不要・写真のアップロードなし</small></div></div>
   </div>
   <div class="walk-toolbar" aria-label="コースの編集とおさんぽ開始">
-   <div class="walk-toolbar-info"><b id="walkStatus">① 写真の上に線を描こう</b><small id="walkSubstatus">離れた線も何本でもOK！ GOで順番に歩きます</small></div>
+   <div class="walk-toolbar-info"><b id="walkStatus">① 写真の上に線を描こう</b><small id="walkSubstatus">手描きもテンプレもOK！ GOで順番に歩きます</small></div>
    <div class="walk-toolbar-buttons">
     <button type="button" class="btn btn-subtle" id="undoBtn">↶ ひとつ戻す</button>
     <button type="button" class="btn btn-subtle" id="clearBtn">♲ 全部けす</button>
@@ -112,6 +122,22 @@ dialog{border:0;border-radius:22px;padding:0;max-width:min(94vw,470px);box-shado
     <label class="form-label" for="opacityRange">あしあとの濃さ <output id="opacityOut">85%</output></label><input type="range" id="opacityRange" min="0" max="100" value="85" step="5" style="--fill:85%">
   </section>
   <section class="ctrl-section"><div class="ctrl-header"><div class="ctrl-heading"><span class="roundicon">🐾</span><strong>あるくスピード</strong></div></div><div class="segment" id="speedSegment"><button type="button" class="speed-btn" data-speed="slow" aria-pressed="false">のんびり</button><button type="button" class="speed-btn" data-speed="normal" aria-pressed="true">ふつう</button><button type="button" class="speed-btn" data-speed="fast" aria-pressed="false">はやい</button></div></section>
+  <section class="ctrl-section" id="templateSection"><div class="ctrl-header"><div class="ctrl-heading"><span class="roundicon">✨</span><strong>かたちテンプレート</strong></div><span class="mini">○ □ ☆ ♡</span></div>
+    <div class="template-grid" id="templateShapeGrid">
+      <button type="button" class="template-btn" data-shape="circle" aria-pressed="true">○<small>まる</small></button>
+      <button type="button" class="template-btn" data-shape="square" aria-pressed="false">□<small>しかく</small></button>
+      <button type="button" class="template-btn" data-shape="star" aria-pressed="false">☆<small>ほし</small></button>
+      <button type="button" class="template-btn" data-shape="heart" aria-pressed="false">♡<small>ハート</small></button>
+    </div>
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-top:10px"><span class="template-badge" id="templateBadge">テンプレ表示中</span><button type="button" class="btn btn-light" id="toggleTemplateBtn" style="padding:8px 11px;font-size:11px">かくす</button></div>
+    <label class="form-label" for="templateWidthRange">よこ幅 <output id="templateWidthOut">40%</output></label><input type="range" id="templateWidthRange" min="20" max="90" value="40" step="1" style="--fill:29%">
+    <label class="form-label" for="templateHeightRange">たて幅 <output id="templateHeightOut">40%</output></label><input type="range" id="templateHeightRange" min="20" max="90" value="40" step="1" style="--fill:29%">
+    <label class="form-label" for="templateRotateRange">回転 <output id="templateRotateOut">0°</output></label><input type="range" id="templateRotateRange" min="-180" max="180" value="0" step="5" style="--fill:50%">
+    <label class="form-label" for="templateXRange">左右の位置 <output id="templateXOut">中央</output></label><input type="range" id="templateXRange" min="0" max="100" value="50" step="1" style="--fill:50%">
+    <label class="form-label" for="templateYRange">上下の位置 <output id="templateYOut">中央</output></label><input type="range" id="templateYRange" min="0" max="100" value="50" step="1" style="--fill:50%">
+    <div class="template-actions"><button type="button" class="btn btn-subtle" id="centerTemplateBtn">中央にもどす</button><button type="button" class="btn btn-green" id="addTemplateBtn">＋ コースに追加</button></div>
+    <div class="template-note">テンプレートの点線を写真に重ねて調整し、「コースに追加」で線として登録します。登録後はGOで歩けて、ひとつ戻すにも対応します。</div>
+  </section>
   <section class="ctrl-section"><div class="toggle-line"><div><b>あしあとを残す</b><small>OFFなら足跡を残しません</small></div><button id="stampsToggle" class="switch" type="button" role="switch" aria-label="あしあとを残す" aria-checked="true"></button></div></section>
   <div class="save-panel"><button type="button" id="saveBtn" class="btn btn-green savebtn">✦ あしあと画像を保存</button><button type="button" id="shareBtn" class="btn btn-light sharebtn">↗ 画像を共有する</button><div class="action-caption">元画像のサイズを保ってPNGに保存。<br>動物やボタンは写りません。</div></div>
  </aside>
@@ -143,12 +169,22 @@ dialog{border:0;border-radius:22px;padding:0;max-width:min(94vw,470px);box-shado
     draftStrokes:[],drawingStroke:null,pointerId:null,lastTouch:null,
     queue:[],runIndex:0,pointIndex:0,runMode:'',playing:false,groups:[],marks:[],nextGroup:1,activeGroup:0,
     stampAccum:0,footSide:1,motion:0,traveling:false,viewW:12,viewH:9,
+    template:{active:true,shape:'circle',widthPct:40,heightPct:40,rotation:0,xPct:50,yPct:50,cx:0,cz:0,w:4,h:4},
     sizeByAnimal:Object.fromEntries(Object.entries(animals).map(([k,a])=>[k,a.defaultSize]))};
   // Footprints are kept in photo-local normalized coordinates, independent of screen resolution.
   let previewCanvas=document.createElement('canvas'),previewCtx=previewCanvas.getContext('2d',{alpha:true});
   let gl=null,scene3d=null,photoTexture=null,printsTexture=null,shadowTexture=null,frameId=0,lastFrame=0,lastPhotoURL=null;
   const $out=(id,value)=>{$(id).textContent=value};
 
+  function lerp(a,b,t){return a+(b-a)*t}
+  function shapeLabel(shape){return({circle:'○ まる',square:'□ しかく',star:'☆ ほし',heart:'♡ ハート'})[shape]||'テンプレ'}
+  function templateBounds(width,height,rotation){const c=Math.cos(rotation),s=Math.sin(rotation);return{ex:Math.abs(c)*width/2+Math.abs(s)*height/2,ez:Math.abs(s)*width/2+Math.abs(c)*height/2}}
+  function computeTemplateGeometry(){const tpl=state.template;tpl.w=state.pw*tpl.widthPct/100;tpl.h=state.ph*tpl.heightPct/100;const b=templateBounds(tpl.w,tpl.h,tpl.rotation);tpl.cx=lerp(-state.pw/2+b.ex,state.pw/2-b.ex,tpl.xPct/100);tpl.cz=lerp(-state.ph/2+b.ez,state.ph/2-b.ez,tpl.yPct/100)}
+  function updateTemplateOutputs(){const tpl=state.template;computeTemplateGeometry();$('templateWidthOut').textContent=`${Math.round(tpl.widthPct)}%`;$('templateHeightOut').textContent=`${Math.round(tpl.heightPct)}%`;$('templateRotateOut').textContent=`${Math.round(tpl.rotation*180/Math.PI)}°`;const fmtPos=(pct)=>Math.abs(pct-50)<1?'中央':pct<50?`左 ${Math.round(50-pct)}%`:`右 ${Math.round(pct-50)}%`;const fmtY=(pct)=>Math.abs(pct-50)<1?'中央':pct<50?`上 ${Math.round(50-pct)}%`:`下 ${Math.round(pct-50)}%`;$('templateXOut').textContent=fmtPos(tpl.xPct);$('templateYOut').textContent=fmtY(tpl.yPct);['templateWidthRange','templateHeightRange','templateRotateRange','templateXRange','templateYRange'].forEach(id=>{const el=$(id);el.style.setProperty('--fill',`${(Number(el.value)-Number(el.min))/(Number(el.max)-Number(el.min))*100}%`)});$('templateBadge').textContent=tpl.active?`${shapeLabel(tpl.shape)} を表示中`:'テンプレ非表示';$('toggleTemplateBtn').textContent=tpl.active?'かくす':'ひょうじ'}
+  function resetTemplatePosition(){state.template.widthPct=40;state.template.heightPct=40;state.template.rotation=0;state.template.xPct=50;state.template.yPct=50;$('templateWidthRange').value=state.template.widthPct;$('templateHeightRange').value=state.template.heightPct;$('templateRotateRange').value=0;$('templateXRange').value=50;$('templateYRange').value=50;updateTemplateOutputs()}
+  function localToTemplateWorld(lx,lz){const tpl=state.template,c=Math.cos(tpl.rotation),s=Math.sin(tpl.rotation);return safePosition({x:tpl.cx+(lx*tpl.w)*c-(lz*tpl.h)*s,z:tpl.cz+(lx*tpl.w)*s+(lz*tpl.h)*c})}
+  function normalizePoints(points){let minX=Infinity,maxX=-Infinity,minZ=Infinity,maxZ=-Infinity;for(const p of points){if(p.x<minX)minX=p.x;if(p.x>maxX)maxX=p.x;if(p.z<minZ)minZ=p.z;if(p.z>maxZ)maxZ=p.z}const cx=(minX+maxX)/2,cz=(minZ+maxZ)/2,scale=.92/Math.max(maxX-minX,maxZ-minZ,1e-6);return points.map(p=>({x:(p.x-cx)*scale,z:(p.z-cz)*scale}))}
+  function buildTemplateStroke(){const tpl=state.template;let raw=[];if(tpl.shape==='circle'){for(let i=0;i<=128;i++){const a=i/128*Math.PI*2;raw.push({x:Math.cos(a)*.5,z:Math.sin(a)*.5})}}else if(tpl.shape==='square'){raw=[{x:-.5,z:-.5},{x:.5,z:-.5},{x:.5,z:.5},{x:-.5,z:.5},{x:-.5,z:-.5}]}else if(tpl.shape==='star'){const outer=.5,inner=.22;for(let i=0;i<=10;i++){const k=i%10,r=k%2===0?outer:inner,a=-Math.PI/2+k*Math.PI/5;raw.push({x:Math.cos(a)*r,z:Math.sin(a)*r})}}else if(tpl.shape==='heart'){for(let i=0;i<=180;i++){const t=i/180*Math.PI*2;raw.push({x:16*Math.sin(t)**3,z:-(13*Math.cos(t)-5*Math.cos(2*t)-2*Math.cos(3*t)-Math.cos(4*t))})}raw=normalizePoints(raw)}const stroke={points:[]};for(const p of raw)appendPoint(stroke,localToTemplateWorld(p.x,p.z));if(stroke.points.length<2)appendPoint(stroke,localToTemplateWorld(0,0));return stroke}
   function drawPaw(ctx,mark,width,height){
     if(mark.opacity<=0)return;
     const px=mark.u*width,py=mark.v*height,s=mark.size/mark.boardWidth*width;
@@ -204,19 +240,19 @@ dialog{border:0;border-radius:22px;padding:0;max-width:min(94vw,470px);box-shado
       $('walkSubstatus').textContent=`${Math.min(state.runIndex+1,state.queue.length)} / ${state.queue.length} 本目 ・ 線と線の間は足跡なし`;
     }else if(n>0){
       $('walkStatus').textContent=`✓ ${n}本の線を準備しました`;
-      $('walkSubstatus').textContent='GOで描いた順番に歩きます。離れた線もOK！';
+      $('walkSubstatus').textContent='手描きもテンプレも、追加した順番に歩きます。';
     }else{
       $('walkStatus').textContent='① 写真の上に線を描こう';
-      $('walkSubstatus').textContent='離れた線も何本でもOK！ GOで順番に歩きます';
+      $('walkSubstatus').textContent='手描きもテンプレもOK！ GOで順番に歩きます';
     }
   }
   function lockRouteSettings(locked){
-    document.querySelectorAll('.animal-btn,.swatch,.speed-btn,#customColor,#sizeRange,#opacityRange,#stampsToggle').forEach(el=>el.disabled=locked);
+    document.querySelectorAll('.animal-btn,.swatch,.speed-btn,.template-btn,#customColor,#sizeRange,#opacityRange,#stampsToggle,#templateWidthRange,#templateHeightRange,#templateRotateRange,#templateXRange,#templateYRange,#toggleTemplateBtn,#centerTemplateBtn,#addTemplateBtn').forEach(el=>el.disabled=locked);
   }
   function stopTravel(){state.queue=[];state.runIndex=0;state.pointIndex=0;state.runMode='';state.playing=false;state.traveling=false;state.motion=0;state.stampAccum=0;state.activeGroup=0;lockRouteSettings(false);updateToolbar()}
   function clearMarks(){stopTravel();state.draftStrokes=[];state.drawingStroke=null;state.pointerId=null;state.lastTouch=null;
     state.marks=[];state.groups=[];state.nextGroup=1;state.footSide=1;
-    previewCtx.clearRect(0,0,previewCanvas.width,previewCanvas.height);if(scene3d)scene3d.dirty=true;updateToolbar()}
+    previewCtx.clearRect(0,0,previewCanvas.width,previewCanvas.height);if(scene3d)scene3d.dirty=true;updateToolbar();updateTemplateOutputs()}
   function undo(){if(state.playing)stopTravel();if(state.draftStrokes.length){state.draftStrokes.pop();updateToolbar();toast('最後に描いた線を取り消しました ↶');return}
     if(state.drawingStroke){state.drawingStroke=null;state.pointerId=null;updateToolbar();return}
     if(!state.groups.length){toast('戻せる線や足跡がありません');return}
@@ -244,7 +280,7 @@ dialog{border:0;border-radius:22px;padding:0;max-width:min(94vw,470px);box-shado
     state.photo={source:img,width:w,height:h};state.photoName=name;
     const ratio=w/h;state.pw=ratio>=1?10:10*ratio;state.ph=ratio>=1?10/ratio:10;
     state.animalScale=clamp(Math.min(state.pw,state.ph)/3.2,.29,1);
-    state.x=0;state.z=0;state.yaw=0;clearMarks();state.started=true;
+    state.x=0;state.z=0;state.yaw=0;clearMarks();state.started=true;state.template.active=true;resetTemplatePosition();
     $('welcome').hidden=true;$('photoLabel').textContent=`${isSample?'🌿':'🖼️'} ${name.length>29?name.slice(0,27)+'…':name}`;
     setupPreview();if(scene3d){scene3d.setPhoto(img);scene3d.resize()}
     $('hintText').textContent='線をなぞって、GOを押してね！';toast('準備OK！コースをなぞってからGOを押そう 🐾');
@@ -275,6 +311,13 @@ dialog{border:0;border-radius:22px;padding:0;max-width:min(94vw,470px);box-shado
   function setSlider(input,output){let v=Number(input.value);state[input.id==='sizeRange'?'size':'opacity']=input.id==='sizeRange'?v:v/100;if(input.id==='sizeRange')state.sizeByAnimal[state.animal]=v;output.textContent=`${v}%`;input.style.setProperty('--fill',`${(v-Number(input.min))/(Number(input.max)-Number(input.min))*100}%`)}
   ['sizeRange','opacityRange'].forEach(id=>{$(id).addEventListener('input',()=>setSlider($(id),$(id==='sizeRange'?'sizeOut':'opacityOut')));setSlider($(id),$(id==='sizeRange'?'sizeOut':'opacityOut'))});
   document.querySelectorAll('.speed-btn').forEach(btn=>btn.addEventListener('click',()=>{state.speed=btn.dataset.speed;document.querySelectorAll('.speed-btn').forEach(b=>b.setAttribute('aria-pressed',String(b===btn)))}));
+  document.querySelectorAll('.template-btn').forEach(btn=>btn.addEventListener('click',()=>{state.template.shape=btn.dataset.shape;state.template.active=true;document.querySelectorAll('.template-btn').forEach(b=>b.setAttribute('aria-pressed',String(b===btn)));updateTemplateOutputs();toast(`${shapeLabel(state.template.shape)} テンプレを選びました`)}));
+  [['templateWidthRange','widthPct'],['templateHeightRange','heightPct'],['templateXRange','xPct'],['templateYRange','yPct']].forEach(([id,key])=>{$(id).addEventListener('input',e=>{state.template[key]=Number(e.target.value);state.template.active=true;updateTemplateOutputs()})});
+  $('templateRotateRange').addEventListener('input',e=>{state.template.rotation=Number(e.target.value)*Math.PI/180;state.template.active=true;updateTemplateOutputs()});
+  $('toggleTemplateBtn').addEventListener('click',()=>{state.template.active=!state.template.active;updateTemplateOutputs()});
+  $('centerTemplateBtn').addEventListener('click',()=>{state.template.active=true;resetTemplatePosition();toast('テンプレートを中央に戻しました')});
+  $('addTemplateBtn').addEventListener('click',()=>{if(!state.started){toast('まず写真を選んでください');return}state.template.active=true;const stroke=buildTemplateStroke();state.draftStrokes.push(stroke);$('hintText').textContent='テンプレのコースを追加しました。GOで歩かせよう！';updateToolbar();toast(`${shapeLabel(state.template.shape)} のコースを追加しました ✨`)})
+  updateTemplateOutputs();
   $('stampsToggle').addEventListener('click',()=>{state.stampsOn=!state.stampsOn;$('stampsToggle').setAttribute('aria-checked',String(state.stampsOn));toast(state.stampsOn?'あしあとを残します 🐾':'あしあとを残さず歩きます')});
   $('undoBtn').addEventListener('click',undo);$('clearBtn').addEventListener('click',()=>{if(!state.marks.length&&!state.draftStrokes.length&&!state.playing){toast('消す線や足跡はありません');return}$('confirmDialog').showModal()});
   $('cancelClear').addEventListener('click',()=>$('confirmDialog').close());$('confirmClear').addEventListener('click',()=>{clearMarks();$('confirmDialog').close();$('hintText').textContent='線をなぞって、GOを押してね！';toast('線とあしあとをすべて消しました')});
@@ -309,7 +352,7 @@ dialog{border:0;border-radius:22px;padding:0;max-width:min(94vw,470px);box-shado
   function beginRun(){
     if(!state.started){toast('まず写真を選んでください');return}
     if(state.playing){stopTravel();$('hintText').textContent='中断しました。新しい線を描いてね';toast('おさんぽを中断しました');return}
-    if(!state.draftStrokes.length){toast('先に写真の上をなぞって線を描いてね');return}
+    if(!state.draftStrokes.length){toast('線をなぞるか、テンプレをコースに追加してからGOを押してね');return}
     state.queue=state.draftStrokes.map(stroke=>({points:stroke.points.map(p=>({...p})),group:state.nextGroup++}));
     state.draftStrokes=[];state.runIndex=0;state.pointIndex=0;state.runMode='reposition';state.playing=true;
     state.stampAccum=0;state.activeGroup=0;lockRouteSettings(true);
@@ -523,6 +566,15 @@ dialog{border:0;border-radius:22px;padding:0;max-width:min(94vw,470px);box-shado
       ctx.strokeStyle=state.playing?'#e69e55e6':'#4f9675ed';ctx.lineWidth=3*k;ctx.setLineDash([8*k,5*k]);ctx.stroke();ctx.setLineDash([]);
       ctx.beginPath();ctx.arc(px(points[0]),py(points[0]),5*k,0,2*Math.PI);ctx.fillStyle=state.playing?'#e4a657':'#3f8f6b';ctx.fill();
       ctx.beginPath();ctx.arc(px(points[0]),py(points[0]),2.3*k,0,2*Math.PI);ctx.fillStyle='#fff';ctx.fill();
+    }
+    if(!state.playing&&state.started&&state.template.active){
+      const tplStroke=buildTemplateStroke(),pts=tplStroke.points;
+      if(pts.length){
+        ctx.beginPath();ctx.moveTo(px(pts[0]),py(pts[0]));for(let i=1;i<pts.length;i++)ctx.lineTo(px(pts[i]),py(pts[i]));
+        ctx.strokeStyle='rgba(255,255,255,.92)';ctx.lineWidth=5*k;ctx.setLineDash([]);ctx.stroke();
+        ctx.strokeStyle='#a35ccfe8';ctx.lineWidth=2.5*k;ctx.setLineDash([10*k,6*k]);ctx.stroke();ctx.setLineDash([]);
+        ctx.beginPath();ctx.arc(px({x:state.template.cx,z:state.template.cz}),py({x:state.template.cx,z:state.template.cz}),4.5*k,0,2*Math.PI);ctx.fillStyle='#a35ccf';ctx.fill();
+      }
     }
     ctx.restore();
   }
