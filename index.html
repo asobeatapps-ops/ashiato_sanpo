@@ -149,6 +149,33 @@ dialog{border:0;border-radius:22px;padding:0;max-width:min(94vw,470px);box-shado
  .stage-top .stage-label{top:4px;left:0;right:auto;max-width:calc(100% - 430px)}
 }
 
+/* V5: Nothing interactive or decorative can obscure the photo once play begins. */
+.photo-control-strip{display:flex;flex-direction:column;gap:7px;padding:8px 10px 9px;margin-bottom:8px;background:#fff;border:1px solid #e3e9e0;border-radius:15px;box-shadow:0 4px 17px #2442320b}
+.photo-meta{display:flex;align-items:center;justify-content:space-between;gap:12px;min-height:16px;font-size:10px;line-height:1.25;font-weight:800}
+.photo-meta-name{color:#4e765e;max-width:48%;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.photo-meta-hint{color:#819084;max-width:52%;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;text-align:right}
+.photo-control-strip .walk-toolbar-buttons{display:grid;grid-template-columns:1fr 1fr .94fr;gap:7px;width:100%}
+.photo-control-strip .walk-toolbar-buttons .btn{width:100%;min-width:0;height:38px;min-height:38px;border-radius:10px;font-size:12px;padding:6px 5px;box-shadow:none}
+.photo-control-strip .walk-toolbar-buttons .go-btn{background:var(--green);color:white;box-shadow:0 3px 12px #376b5333;font-size:16px;font-weight:900}
+.photo-control-strip .walk-toolbar-buttons .go-btn[data-running="true"]{background:#ce695e;color:#fff;font-size:13px}
+.photo-control-strip .walk-toolbar-buttons button:disabled{opacity:.45}
+.stage>.welcome[hidden]{display:none}
+#quickSaveBtn{display:none!important}
+@media(max-width:740px){
+ .photo-control-strip{padding:6px 8px 7px;gap:5px;margin-bottom:7px;border-radius:12px}
+ .photo-meta{font-size:9px;gap:7px;min-height:13px}
+ .photo-meta-name{max-width:50%}.photo-meta-hint{max-width:50%}
+ .photo-control-strip .walk-toolbar-buttons .btn{height:37px;min-height:37px;font-size:11px}
+ .photo-control-strip .walk-toolbar-buttons .go-btn{font-size:15px}
+ .stage{height:clamp(245px,39.5dvh,450px)}
+}
+@media(max-width:410px){
+ .photo-control-strip .walk-toolbar-buttons .btn{font-size:10px}
+ .photo-control-strip .walk-toolbar-buttons .go-btn{font-size:15px}
+ .stage{height:clamp(235px,38.5dvh,420px)}
+}
+@media(max-height:660px) and (max-width:740px){.stage{height:clamp(220px,37dvh,320px)}}
+
 </style>
 </head>
 <body>
@@ -168,20 +195,23 @@ dialog{border:0;border-radius:22px;padding:0;max-width:min(94vw,470px);box-shado
     <button class="animal-btn" data-animal="horse" aria-pressed="false" type="button"><span class="animal-icon">🐴</span>うま</button>
    </div>
   </div>
+  <div class="photo-control-strip" aria-label="おさんぽ操作と写真情報">
+    <div class="photo-meta">
+      <span class="photo-meta-name" id="photoLabel">🌿 サンプルの原っぱ</span>
+      <span class="photo-meta-hint" id="hintText" aria-live="polite">線をなぞって、GOでおさんぽ！</span>
+    </div>
+    <div class="walk-toolbar-buttons">
+      <button type="button" class="btn btn-subtle" id="undoBtn">↶ ひとつ戻す</button>
+      <button type="button" class="btn btn-subtle" id="clearBtn">♲ 全部けす</button>
+      <button type="button" class="btn go-btn" id="goBtn" disabled>▶ GO</button>
+    </div>
+    <div class="sr-only" aria-live="polite"><b id="walkStatus">① 写真の上に線を描こう</b><small id="walkSubstatus">手描きもテンプレもOK！ GOで順番に歩きます</small></div>
+  </div>
   <div class="stage" id="stage" aria-label="写真の上をなぞって動物を歩かせる領域">
    <canvas id="glCanvas" aria-hidden="true"></canvas><canvas id="guideCanvas" aria-hidden="true"></canvas>
-   <div class="stage-top" aria-label="おさんぽ操作">
-     <div class="walk-toolbar-buttons">
-       <button type="button" class="btn btn-subtle" id="undoBtn">↶ ひとつ戻す</button>
-       <button type="button" class="btn btn-subtle" id="clearBtn">♲ 全部けす</button>
-       <button type="button" class="btn go-btn" id="goBtn" disabled>▶ GO</button>
-     </div>
-     <span class="stage-label" id="photoLabel">🌿 サンプルの原っぱ</span>
-     <div class="sr-only" aria-live="polite"><b id="walkStatus">① 写真の上に線を描こう</b><small id="walkSubstatus">手描きもテンプレもOK！ GOで順番に歩きます</small></div>
-   </div>
-   <button id="quickSaveBtn" class="quick-save" type="button">↓ PNGを保存</button><div class="stage-guide"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round"><path d="M8 14a2 2 0 1 1-4 0 2 2 0 0 1 4 0ZM13 7a2 2 0 1 1-4 0 2 2 0 0 1 4 0ZM20 9a2 2 0 1 1-4 0 2 2 0 0 1 4 0Z"/><path d="M8 19c2-3 4-5 7-5 2 0 4 1 4 4"/></svg><span id="hintText">線をなぞって、GOでおさんぽ！</span></div>
    <div class="welcome" id="welcome"><div class="welcome-card"><div class="welcome-animals">🐶 🐱 🐻 🐴</div><h2>写真の上で、<br><span>あしあとさんぽ。</span></h2><p>お気に入りの写真が、どうぶつたちの遊び場に。<br>好きな線を描いてGO！とことこ歩いて足跡アートを作ろう。</p><button class="btn btn-green" id="pickPhotoWelcome" type="button">🖼️ 写真をえらんで遊ぶ</button><button class="btn btn-light" id="playSample" type="button">🌿 サンプルの原っぱで遊ぶ</button><small>無料・ログイン不要・写真のアップロードなし</small></div></div>
   </div>
+  <button id="quickSaveBtn" type="button" hidden>PNGを保存</button>
   <section class="template-workbench" id="templateSection" aria-label="テンプレートを写真の下で調整する">
     <div class="template-topline">
       <div class="template-title"><b>✨ かたち</b><span>写真を見ながら調整</span></div>
